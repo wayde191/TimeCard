@@ -15,6 +15,7 @@
 		BA9B7B251D352F0C007ACA82 /* TimeCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B241D352F0C007ACA82 /* TimeCardTests.swift */; };
 		BA9B7B301D352F0C007ACA82 /* TimeCardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B2F1D352F0C007ACA82 /* TimeCardUITests.swift */; };
 		BA9B7B3F1D353157007ACA82 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B3E1D353157007ACA82 /* Date.swift */; };
+		BAB6829D1D368D24005ED69B /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = BAB6829C1D368D24005ED69B /* test.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		BA9B7B2F1D352F0C007ACA82 /* TimeCardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCardUITests.swift; sourceTree = "<group>"; };
 		BA9B7B311D352F0D007ACA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA9B7B3E1D353157007ACA82 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		BAB6829C1D368D24005ED69B /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			children = (
 				BA9B7B241D352F0C007ACA82 /* TimeCardTests.swift */,
 				BA9B7B261D352F0C007ACA82 /* Info.plist */,
+				BAB6829C1D368D24005ED69B /* test.html */,
 			);
 			path = TimeCardTests;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB6829D1D368D24005ED69B /* test.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +498,7 @@
 				BA9B7B361D352F0D007ACA82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA9B7B371D352F0D007ACA82 /* Build configuration list for PBXNativeTarget "TimeCardTests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +507,7 @@
 				BA9B7B391D352F0D007ACA82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA9B7B3A1D352F0D007ACA82 /* Build configuration list for PBXNativeTarget "TimeCardUITests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +516,7 @@
 				BA9B7B3C1D352F0D007ACA82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

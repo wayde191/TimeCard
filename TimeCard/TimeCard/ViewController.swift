@@ -13,6 +13,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var webview: UIWebView!
     @IBOutlet weak var tableview: UITableView!
     
+    var counter = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,11 +74,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func webViewDidFinishLoad(webView: UIWebView){
-        //注入脚本,这个脚本把登录方法js重写为连接
-//        var jsPath =  NSBundle.mainBundle().pathForResource("app", ofType: "js")
-//        var jsContent:NSString = NSString (contentsOfFile: jsPath!, encoding: 0, error: nil)!
-//        jsContent=jsContent.stringByReplacingOccurrencesOfString("\n", withString: "")
-//        webView.stringByEvaluatingJavaScriptFromString(jsContent as String)
+        let rurl =  webView.request?.URL?.absoluteString
+        print(rurl)
+//        let bodyHTML = webView.stringByEvaluatingJavaScriptFromString("document.getElementsByTagName('html')[0].innerHTML")
+//        print(bodyHTML)
+        
+        if rurl == "https://login.salesforce.com/"
+        {
+            let script = "document.getElementById('password').value='????';"
+                + "document.getElementById('Login').click();"
+            counter++
+            print(counter)
+            if counter == 5
+            {
+                webView.stringByEvaluatingJavaScriptFromString(script)
+            }
+        }
+        
+        
     }
     
     func signin_go(){
