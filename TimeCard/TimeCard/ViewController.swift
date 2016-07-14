@@ -14,9 +14,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableview: UITableView!
     
     var counter = 0
+    var oneAppCounter = 0
+    var domElementModel: DomElement?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
         webview.loadRequest(NSURLRequest(URL: NSURL(string: "https://login.salesforce.com")!))
         
@@ -62,7 +67,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: UIWebView Delegate
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool{
         let rurl =  request.URL?.absoluteString
-        print(rurl)
+//        print(rurl)
         if (rurl!.hasPrefix("ios:")){
             let method =  rurl!.componentsSeparatedByString("@")[1]
             if method == "signin_go"{
@@ -75,13 +80,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func webViewDidFinishLoad(webView: UIWebView){
         let rurl =  webView.request?.URL?.absoluteString
-        print(rurl)
+//        print(rurl)
 //        let bodyHTML = webView.stringByEvaluatingJavaScriptFromString("document.getElementsByTagName('html')[0].innerHTML")
 //        print(bodyHTML)
         
         if rurl == "https://login.salesforce.com/"
         {
-            let script = "document.getElementById('password').value='????';"
+            let script = "document.getElementById('password').value='???';"
                 + "document.getElementById('Login').click();"
             counter++
             print(counter)
@@ -89,9 +94,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             {
                 webView.stringByEvaluatingJavaScriptFromString(script)
             }
+        } else if rurl == "https://na32.lightning.force.com/one/one.app"
+        {
+            oneAppCounter++
+            print(oneAppCounter)
+            if 1 == oneAppCounter
+            {
+                domElementModel?.findElementByClassNameUntil("toggleNav", timesLeft: 5,
+                    callback: { (result: Bool) -> () in
+                        if result == true {
+                            print("lalala....")
+                            self.domElementModel?.clickToggleNavButton()
+                            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
+                            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                                self.domElementModel?.clickMore()
+                            }
+                        }
+                })
+            }
         }
         
         
+    }
+    
+    func test() -> Bool {
+        let script = "document.getElementsByClassName('toggleNav');"
+        let result = webview.stringByEvaluatingJavaScriptFromString(script);
+        print(result)
+        
+        return result == ""
     }
     
     func signin_go(){

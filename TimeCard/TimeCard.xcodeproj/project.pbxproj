@@ -16,6 +16,7 @@
 		BA9B7B301D352F0C007ACA82 /* TimeCardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B2F1D352F0C007ACA82 /* TimeCardUITests.swift */; };
 		BA9B7B3F1D353157007ACA82 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B3E1D353157007ACA82 /* Date.swift */; };
 		BAB6829D1D368D24005ED69B /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = BAB6829C1D368D24005ED69B /* test.html */; };
+		BAB682A01D37A996005ED69B /* DomElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6829F1D37A996005ED69B /* DomElement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		BA9B7B311D352F0D007ACA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA9B7B3E1D353157007ACA82 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BAB6829C1D368D24005ED69B /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		BAB6829F1D37A996005ED69B /* DomElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomElement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		BA9B7B0E1D352F0C007ACA82 /* TimeCard */ = {
 			isa = PBXGroup;
 			children = (
+				BAB6829E1D37A7FE005ED69B /* model */,
 				BA9B7B3D1D353134007ACA82 /* utils */,
 				BA9B7B0F1D352F0C007ACA82 /* AppDelegate.swift */,
 				BA9B7B111D352F0C007ACA82 /* ViewController.swift */,
@@ -137,6 +140,14 @@
 				BA9B7B3E1D353157007ACA82 /* Date.swift */,
 			);
 			path = utils;
+			sourceTree = "<group>";
+		};
+		BAB6829E1D37A7FE005ED69B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BAB6829F1D37A996005ED69B /* DomElement.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA9B7B121D352F0C007ACA82 /* ViewController.swift in Sources */,
+				BAB682A01D37A996005ED69B /* DomElement.swift in Sources */,
 				BA9B7B3F1D353157007ACA82 /* Date.swift in Sources */,
 				BA9B7B101D352F0C007ACA82 /* AppDelegate.swift in Sources */,
 			);
