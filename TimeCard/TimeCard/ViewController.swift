@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
-        webview.loadRequest(NSURLRequest(URL: NSURL(string: "https://login.salesforce.com")!))
+        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
         
         print(NSDate.getTodayWeekStr())
         print(NSDate.get(.Next, "Sunday", considerToday:  true))
@@ -32,7 +32,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: UITableView DataSource and Delegate
@@ -80,22 +79,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func webViewDidFinishLoad(webView: UIWebView){
         let rurl =  webView.request?.URL?.absoluteString
-//        print(rurl)
-//        let bodyHTML = webView.stringByEvaluatingJavaScriptFromString("document.getElementsByTagName('html')[0].innerHTML")
-//        print(bodyHTML)
         
-        if rurl == "https://login.salesforce.com/"
-        {
-            let script = "document.getElementById('password').value='???';"
-                + "document.getElementById('Login').click();"
+        if rurl == SALESFORCE_LOGIN_URL {
             counter++
             print(counter)
-            if counter == 5
-            {
-                webView.stringByEvaluatingJavaScriptFromString(script)
+            if counter == 5 {
+                domElementModel?.doLogin()
             }
-        } else if rurl == "https://na32.lightning.force.com/one/one.app"
-        {
+        } else if rurl == SALESFORCE_ONE_APP_URL {
             oneAppCounter++
             print(oneAppCounter)
             if 1 == oneAppCounter
@@ -103,7 +94,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 domElementModel?.findElementByClassNameUntil("toggleNav", timesLeft: 5,
                     callback: { (result: Bool) -> () in
                         if result == true {
-                            print("lalala....")
                             self.domElementModel?.clickToggleNavButton()
                             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
                             dispatch_after(delayTime, dispatch_get_main_queue()) {
@@ -113,16 +103,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 })
             }
         }
-        
-        
-    }
-    
-    func test() -> Bool {
-        let script = "document.getElementsByClassName('toggleNav');"
-        let result = webview.stringByEvaluatingJavaScriptFromString(script);
-        print(result)
-        
-        return result == ""
     }
     
     func signin_go(){

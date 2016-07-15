@@ -18,6 +18,12 @@ class DomElement: NSObject {
         self.webview = webview
     }
     
+    func doLogin() {
+        let script = "document.getElementById('password').value='Hakula@2015!';"
+            + "document.getElementById('Login').click();"
+        self.webview.stringByEvaluatingJavaScriptFromString(script)
+    }
+    
     func clickToggleNavButton() {
         self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('toggleNav')[0].click();")
     }
