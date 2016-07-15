@@ -8,5 +8,5 @@
 
 import Foundation
 
-let SALESFORCE_LOGIN_URL    = "https://login.salesforce.com"
+let SALESFORCE_LOGIN_URL    = "https://login.salesforce.com/"
 let SALESFORCE_ONE_APP_URL  = "https://na32.lightning.force.com/one/one.app"

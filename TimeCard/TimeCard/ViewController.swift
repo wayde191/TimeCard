@@ -66,7 +66,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: UIWebView Delegate
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool{
         let rurl =  request.URL?.absoluteString
-//        print(rurl)
         if (rurl!.hasPrefix("ios:")){
             let method =  rurl!.componentsSeparatedByString("@")[1]
             if method == "signin_go"{
@@ -94,11 +93,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 domElementModel?.findElementByClassNameUntil("toggleNav", timesLeft: 5,
                     callback: { (result: Bool) -> () in
                         if result == true {
-                            self.domElementModel?.clickToggleNavButton()
-                            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
-                            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                                self.domElementModel?.clickMore()
-                            }
+                            print("????")
+                            self.domElementModel?.triggerEvent("searchProject", afterDelay: 2)
+                            self.domElementModel?.triggerEvent("clickProjectItem", afterDelay: 5)
+                            self.domElementModel?.triggerEvent("clickProjectFound", afterDelay: 8)
+                            self.domElementModel?.triggerEvent("clickRelated", afterDelay: 9)
+                            self.domElementModel?.triggerEvent("clickRelatedTimeCard", afterDelay: 10)
+                            self.domElementModel?.triggerEvent("getListHtml", afterDelay: 13)
+
                         }
                 })
             }
