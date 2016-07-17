@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA2A40651D38631D006B6409 /* appConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2A40641D38631D006B6409 /* appConf.swift */; };
+		BA36CBC71D3B04340087523E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = BA36CBC61D3B04340087523E /* test.html */; };
 		BA9B7B101D352F0C007ACA82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B0F1D352F0C007ACA82 /* AppDelegate.swift */; };
 		BA9B7B121D352F0C007ACA82 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B111D352F0C007ACA82 /* ViewController.swift */; };
 		BA9B7B151D352F0C007ACA82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA9B7B131D352F0C007ACA82 /* Main.storyboard */; };
@@ -16,7 +17,6 @@
 		BA9B7B251D352F0C007ACA82 /* TimeCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B241D352F0C007ACA82 /* TimeCardTests.swift */; };
 		BA9B7B301D352F0C007ACA82 /* TimeCardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B2F1D352F0C007ACA82 /* TimeCardUITests.swift */; };
 		BA9B7B3F1D353157007ACA82 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B3E1D353157007ACA82 /* Date.swift */; };
-		BAB6829D1D368D24005ED69B /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = BAB6829C1D368D24005ED69B /* test.html */; };
 		BAB682A01D37A996005ED69B /* DomElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6829F1D37A996005ED69B /* DomElement.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		BA2A40641D38631D006B6409 /* appConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appConf.swift; sourceTree = "<group>"; };
+		BA36CBC61D3B04340087523E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		BA9B7B0C1D352F0C007ACA82 /* TimeCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9B7B0F1D352F0C007ACA82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA9B7B111D352F0C007ACA82 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		BA9B7B2F1D352F0C007ACA82 /* TimeCardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCardUITests.swift; sourceTree = "<group>"; };
 		BA9B7B311D352F0D007ACA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA9B7B3E1D353157007ACA82 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		BAB6829C1D368D24005ED69B /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		BAB6829F1D37A996005ED69B /* DomElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomElement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +113,7 @@
 		BA9B7B0E1D352F0C007ACA82 /* TimeCard */ = {
 			isa = PBXGroup;
 			children = (
+				BA36CBC61D3B04340087523E /* test.html */,
 				BA2A40631D3862ED006B6409 /* conf */,
 				BAB6829E1D37A7FE005ED69B /* model */,
 				BA9B7B3D1D353134007ACA82 /* utils */,
@@ -131,7 +132,6 @@
 			children = (
 				BA9B7B241D352F0C007ACA82 /* TimeCardTests.swift */,
 				BA9B7B261D352F0C007ACA82 /* Info.plist */,
-				BAB6829C1D368D24005ED69B /* test.html */,
 			);
 			path = TimeCardTests;
 			sourceTree = "<group>";
@@ -265,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA36CBC71D3B04340087523E /* test.html in Resources */,
 				BA9B7B1A1D352F0C007ACA82 /* LaunchScreen.storyboard in Resources */,
 				BA9B7B171D352F0C007ACA82 /* Assets.xcassets in Resources */,
 				BA9B7B151D352F0C007ACA82 /* Main.storyboard in Resources */,
@@ -275,7 +276,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAB6829D1D368D24005ED69B /* test.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

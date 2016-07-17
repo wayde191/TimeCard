@@ -8,6 +8,13 @@
 
 import UIKit
 
+extension NSRange {
+    func rangeForString(str: String) -> Range<String.Index>? {
+        guard location != NSNotFound else { return nil }
+        return str.startIndex.advancedBy(location) ..< str.startIndex.advancedBy(location + length)
+    }
+}
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate {
 
     @IBOutlet weak var webview: UIWebView!
@@ -18,12 +25,75 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var domElementModel: DomElement?
     
     
+    func getAllInfo(text: String){
+        let members = NSMutableArray()
+        
+        let arr = text.componentsSeparatedByString("dark actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
+        for record in arr {
+            if record.containsString("2016-7-11")
+            {
+                do {
+                    
+                    let rows = record.componentsSeparatedByString("tableRowGroup")
+                    var contextStr = ""
+                    for context in rows {
+                        if context.containsString("Resource:")
+                        {
+                            contextStr = context
+                            break
+                        }
+                    }
+                    
+                    let input:String = contextStr.stringByReplacingOccurrencesOfString("\\\"", withString: "")
+                    let regex = try NSRegularExpression(pattern: "forceOutputLookup\\>(.*)</span>", options: NSRegularExpressionOptions.CaseInsensitive)
+                    let matches = regex.matchesInString(input, options: [], range: NSRange(location: 0, length: input.utf16.count))
+                    if let match = matches.first {
+                        let range = match.rangeAtIndex(1)
+                        if let swiftRange = range.rangeForString(input) {
+                            let name = input.substringWithRange(swiftRange)
+                            members.addObject(name)
+                        }
+                    }
+                } catch {
+                    // regex was bad!
+                }
+            }
+        }
+        
+        print(members)
+    }
+    
+    
+    func readFile() {        
+        let bundle = NSBundle.mainBundle()
+        let path = bundle.pathForResource("test", ofType: "html")
+        print(path)
+        
+        //reading
+        do {
+            let text2 = try NSString(contentsOfURL: NSURL(fileURLWithPath: path!), encoding: NSUTF8StringEncoding)
+            self.getAllInfo(text2 as String)
+        }
+        catch {/* error handling here */}
+
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
-        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
+//        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
+        self.readFile()
+        
         
         print(NSDate.getTodayWeekStr())
         print(NSDate.get(.Next, "Sunday", considerToday:  true))
