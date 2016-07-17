@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+extension NSRange {
+    func rangeForString(str: String) -> Range<String.Index>? {
+        guard location != NSNotFound else { return nil }
+        return str.startIndex.advancedBy(location) ..< str.startIndex.advancedBy(location + length)
+    }
+}
+
 class DomElement: NSObject {
     var name: String
     var webview: UIWebView
@@ -16,6 +23,40 @@ class DomElement: NSObject {
     init(name: String, webview: UIWebView) {
         self.name = name
         self.webview = webview
+    }
+    
+    func getAllInfo(text: String) -> NSArray{
+        let members = NSMutableArray()
+        
+        let arr = text.componentsSeparatedByString("dark actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
+        for record in arr {
+            if record.containsString("2016-7-11") {
+                do {
+                    let rows = record.componentsSeparatedByString("tableRowGroup")
+                    var contextStr = ""
+                    for context in rows {
+                        if context.containsString("Resource:") {
+                            contextStr = context
+                            break
+                        }
+                    }
+                    
+                    let input:String = contextStr.stringByReplacingOccurrencesOfString("\\\"", withString: "")
+                    let regex = try NSRegularExpression(pattern: "forceOutputLookup\\>(.*)</span>", options: NSRegularExpressionOptions.CaseInsensitive)
+                    let matches = regex.matchesInString(input, options: [], range: NSRange(location: 0, length: input.utf16.count))
+                    if let match = matches.first {
+                        let range = match.rangeAtIndex(1)
+                        if let swiftRange = range.rangeForString(input) {
+                            let name = input.substringWithRange(swiftRange)
+                            members.addObject(name)
+                        }
+                    }
+                } catch {
+                    // regex was bad!
+                }
+            }
+        }
+        return members
     }
     
     func doLogin() {

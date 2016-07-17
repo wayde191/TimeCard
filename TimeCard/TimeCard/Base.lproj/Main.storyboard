@@ -107,6 +107,7 @@
                     <connections>
                         <outlet property="tableview" destination="qkh-zV-9Ex" id="vSm-G6-jAh"/>
                         <outlet property="webview" destination="wi0-IT-oyJ" id="T2b-hI-ZaN"/>
+                        <outlet property="webviewContainer" destination="idO-F5-Cvy" id="iLz-oE-rBX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -8,84 +8,42 @@
 
 import UIKit
 
-extension NSRange {
-    func rangeForString(str: String) -> Range<String.Index>? {
-        guard location != NSNotFound else { return nil }
-        return str.startIndex.advancedBy(location) ..< str.startIndex.advancedBy(location + length)
-    }
-}
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate {
 
     @IBOutlet weak var webview: UIWebView!
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var webviewContainer: UIView!
     
     var counter = 0
     var oneAppCounter = 0
+    var memberArr: NSArray?
+    let members: NSArray = ["Li Xufei",
+        "Zhang Mingyun",
+        "Cao Yangyang",
+        "Chen Yu Wuhan Dev",
+        "Gu Chao",
+        "Wang Zhi Tupi",
+        "Sun Wei Wayde",
+        "Wang Tianyi",
+        "Chen Ting",
+        "Li Hongjing"]
     var domElementModel: DomElement?
-    
-    
-    func getAllInfo(text: String){
-        let members = NSMutableArray()
-        
-        let arr = text.componentsSeparatedByString("dark actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
-        for record in arr {
-            if record.containsString("2016-7-11")
-            {
-                do {
-                    
-                    let rows = record.componentsSeparatedByString("tableRowGroup")
-                    var contextStr = ""
-                    for context in rows {
-                        if context.containsString("Resource:")
-                        {
-                            contextStr = context
-                            break
-                        }
-                    }
-                    
-                    let input:String = contextStr.stringByReplacingOccurrencesOfString("\\\"", withString: "")
-                    let regex = try NSRegularExpression(pattern: "forceOutputLookup\\>(.*)</span>", options: NSRegularExpressionOptions.CaseInsensitive)
-                    let matches = regex.matchesInString(input, options: [], range: NSRange(location: 0, length: input.utf16.count))
-                    if let match = matches.first {
-                        let range = match.rangeAtIndex(1)
-                        if let swiftRange = range.rangeForString(input) {
-                            let name = input.substringWithRange(swiftRange)
-                            members.addObject(name)
-                        }
-                    }
-                } catch {
-                    // regex was bad!
-                }
-            }
-        }
-        
-        print(members)
-    }
-    
     
     func readFile() {        
         let bundle = NSBundle.mainBundle()
         let path = bundle.pathForResource("test", ofType: "html")
-        print(path)
         
-        //reading
         do {
             let text2 = try NSString(contentsOfURL: NSURL(fileURLWithPath: path!), encoding: NSUTF8StringEncoding)
-            self.getAllInfo(text2 as String)
+            memberArr = self.domElementModel?.getAllInfo(text2 as String)
         }
         catch {/* error handling here */}
-
-
     }
     
-    
-    
-    
-    
-    
-    
-    
+    func showResult() {
+        self.webviewContainer.hidden = true
+        self.tableview.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
 //        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
         self.readFile()
-        
+        self.showResult()
         
         print(NSDate.getTodayWeekStr())
         print(NSDate.get(.Next, "Sunday", considerToday:  true))
@@ -110,11 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        return 55
+        return members.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -124,8 +78,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
         }
         
-        cell?.textLabel?.text = "TEXT"
-        cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        let member = members[indexPath.row] as? String
+        cell?.textLabel?.text = member
+        
+        if (memberArr!.containsObject(member!)) {
+            cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+        } else {
+            cell?.backgroundColor = UIColor.redColor()
+            cell?.accessoryType = UITableViewCellAccessoryType.None
+        }
         return cell!
     }
     
