@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var counter = 0
     var oneAppCounter = 0
-    var memberArr: NSArray?
+    var memberArr: NSArray? = []
     let members: NSArray = ["Li Xufei",
         "Zhang Mingyun",
         "Cao Yangyang",
@@ -41,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func showResult() {
+        memberArr = self.domElementModel?.getAllInfo((self.domElementModel?.timecardHTML)! as String)
         self.webviewContainer.hidden = true
         self.tableview.reloadData()
     }
@@ -49,9 +50,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
-//        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
-        self.readFile()
-        self.showResult()
+        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
+//        self.readFile()
+//        self.showResult()
         
         print(NSDate.getTodayWeekStr())
         print(NSDate.get(.Next, "Sunday", considerToday:  true))
@@ -83,6 +84,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if (memberArr!.containsObject(member!)) {
             cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell?.backgroundColor = UIColor.whiteColor()
+
         } else {
             cell?.backgroundColor = UIColor.redColor()
             cell?.accessoryType = UITableViewCellAccessoryType.None
@@ -124,19 +127,43 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 domElementModel?.findElementByClassNameUntil("toggleNav", timesLeft: 5,
                     callback: { (result: Bool) -> () in
                         if result == true {
-                            print("????")
-                            self.domElementModel?.triggerEvent("searchProject", afterDelay: 2)
-                            self.domElementModel?.triggerEvent("clickProjectItem", afterDelay: 5)
-                            self.domElementModel?.triggerEvent("clickProjectFound", afterDelay: 8)
-                            self.domElementModel?.triggerEvent("clickRelated", afterDelay: 9)
-                            self.domElementModel?.triggerEvent("clickRelatedTimeCard", afterDelay: 10)
-                            self.domElementModel?.triggerEvent("getListHtml", afterDelay: 13)
+                            self.domElementModel?.searchProject()
+                            self.domElementModel?.findElementByClassNameUntil("selectorItem", timesLeft: 5,
+                                callback: { (found) -> () in
+                                    if found == true {
+                                        self.domElementModel?.clickProjectItem()
+                                        self.domElementModel?.findElementByClassNameUntil("listContent", timesLeft: 5,
+                                            callback: { (found) -> () in
+                                                if found == true {
+                                                    self.domElementModel?.clickProjectFound()
+                                                    self.domElementModel?.findElementByClassNameUntil("nav-container", timesLeft: 5,
+                                                        callback: { (found) -> () in
+                                                            if found == true {
+                                                                self.domElementModel?.clickRelated()
+                                                                self.domElementModel?.triggerEvent("clickRelatedTimeCard", afterDelay: 1)
+                                                                self.domElementModel?.triggerEvent("getListHtml", afterDelay: 3)
+                                                                
+                                                                self.performSelector(NSSelectorFromString("showResult"), withObject: nil, afterDelay: 5.0)
+
+                                                            }
+                                                    })
+                                                }
+                                        })
+                                    }
+                            })
 
                         }
                 })
             }
         }
     }
+    
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        let rurl =  webView.request?.URL?.absoluteString
+        print(rurl)
+        print(error?.userInfo)
+    }
+
     
     func signin_go(){
         NSLog("-我执行了signin_go-")

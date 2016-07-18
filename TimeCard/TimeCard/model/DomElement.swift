@@ -19,6 +19,7 @@ extension NSRange {
 class DomElement: NSObject {
     var name: String
     var webview: UIWebView
+    var timecardHTML = ""
     
     init(name: String, webview: UIWebView) {
         self.name = name
@@ -42,7 +43,7 @@ class DomElement: NSObject {
                     }
                     
                     let input:String = contextStr.stringByReplacingOccurrencesOfString("\\\"", withString: "")
-                    let regex = try NSRegularExpression(pattern: "forceOutputLookup\\>(.*)</span>", options: NSRegularExpressionOptions.CaseInsensitive)
+                    let regex = try NSRegularExpression(pattern: "forceOutputLookup\">(.*)</span>", options: NSRegularExpressionOptions.CaseInsensitive)
                     let matches = regex.matchesInString(input, options: [], range: NSRange(location: 0, length: input.utf16.count))
                     if let match = matches.first {
                         let range = match.rangeAtIndex(1)
@@ -60,7 +61,7 @@ class DomElement: NSObject {
     }
     
     func doLogin() {
-        let script = "document.getElementById('password').value='????';"
+        let script = "document.getElementById('password').value='@2015!';"
             + "document.getElementById('Login').click();"
         self.webview.stringByEvaluatingJavaScriptFromString(script)
     }
@@ -88,7 +89,7 @@ class DomElement: NSObject {
     
     func getListHtml() {
         let html = self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('listContent')[1].getElementsByTagName('ul')[0].innerHTML");
-        print(html)
+        self.timecardHTML = html!
     }
     
     func clickProjectFound() {
