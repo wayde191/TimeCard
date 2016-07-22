@@ -29,17 +29,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         "Li Hongjing"]
     var domElementModel: DomElement?
     
-    func readFile() {        
-        let bundle = NSBundle.mainBundle()
-        let path = bundle.pathForResource("test", ofType: "html")
-        
-        do {
-            let text2 = try NSString(contentsOfURL: NSURL(fileURLWithPath: path!), encoding: NSUTF8StringEncoding)
-            memberArr = self.domElementModel?.getAllInfo(text2 as String)
-        }
-        catch {/* error handling here */}
-    }
-    
     func showResult() {
         memberArr = self.domElementModel?.getAllInfo((self.domElementModel?.timecardHTML)! as String)
         self.webviewContainer.hidden = true
@@ -51,8 +40,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
         webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
-//        self.readFile()
-//        self.showResult()
         
         print(NSDate.getTodayWeekStr())
         print(NSDate.get(.Next, "Sunday", considerToday:  true))
@@ -151,7 +138,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                         })
                                     }
                             })
-
                         }
                 })
             }
