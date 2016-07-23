@@ -155,5 +155,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         NSLog("-我执行了signin_go-")
     }
     
+    //MARK: Segue
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        return true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.destinationViewController.isKindOfClass(AccountViewController) {
+            let accountVC = segue.destinationViewController as! AccountViewController
+            accountVC.homeVC = self
+        }
+    }
+    
 }
 
