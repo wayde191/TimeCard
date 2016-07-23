@@ -19,6 +19,23 @@
 		BA9B7B3F1D353157007ACA82 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B3E1D353157007ACA82 /* Date.swift */; };
 		BAB682A01D37A996005ED69B /* DomElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6829F1D37A996005ED69B /* DomElement.swift */; };
 		BAEFC1F71D431942000A3AED /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1F61D431942000A3AED /* AccountViewController.swift */; };
+		BAEFC20E1D436194000A3AED /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1FA1D436194000A3AED /* LTCharacterDiffResult.swift */; };
+		BAEFC20F1D436194000A3AED /* LTCharacterLimbo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1FB1D436194000A3AED /* LTCharacterLimbo.swift */; };
+		BAEFC2101D436194000A3AED /* LTEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1FC1D436194000A3AED /* LTEasing.swift */; };
+		BAEFC2111D436194000A3AED /* LTEmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1FD1D436194000A3AED /* LTEmitterView.swift */; };
+		BAEFC2121D436194000A3AED /* LTMorphingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1FE1D436194000A3AED /* LTMorphingEffect.swift */; };
+		BAEFC2131D436194000A3AED /* LTMorphingLabel+Anvil.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1FF1D436194000A3AED /* LTMorphingLabel+Anvil.swift */; };
+		BAEFC2141D436194000A3AED /* LTMorphingLabel+Burn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2001D436194000A3AED /* LTMorphingLabel+Burn.swift */; };
+		BAEFC2151D436194000A3AED /* LTMorphingLabel+Evaporate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2011D436194000A3AED /* LTMorphingLabel+Evaporate.swift */; };
+		BAEFC2161D436194000A3AED /* LTMorphingLabel+Fall.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2021D436194000A3AED /* LTMorphingLabel+Fall.swift */; };
+		BAEFC2171D436194000A3AED /* LTMorphingLabel+Pixelate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2031D436194000A3AED /* LTMorphingLabel+Pixelate.swift */; };
+		BAEFC2181D436194000A3AED /* LTMorphingLabel+Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2041D436194000A3AED /* LTMorphingLabel+Sparkle.swift */; };
+		BAEFC2191D436194000A3AED /* LTMorphingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2061D436194000A3AED /* LTMorphingLabel.swift */; };
+		BAEFC21A1D436194000A3AED /* LTStringDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2071D436194000A3AED /* LTStringDiffResult.swift */; };
+		BAEFC21B1D436194000A3AED /* Fire.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEFC2091D436194000A3AED /* Fire.png */; };
+		BAEFC21C1D436194000A3AED /* Fragment.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEFC20A1D436194000A3AED /* Fragment.png */; };
+		BAEFC21D1D436194000A3AED /* Smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEFC20B1D436194000A3AED /* Smoke.png */; };
+		BAEFC21E1D436194000A3AED /* Sparkle.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEFC20C1D436194000A3AED /* Sparkle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +74,24 @@
 		BA9B7B3E1D353157007ACA82 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BAB6829F1D37A996005ED69B /* DomElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomElement.swift; sourceTree = "<group>"; };
 		BAEFC1F61D431942000A3AED /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		BAEFC1FA1D436194000A3AED /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterDiffResult.swift; sourceTree = "<group>"; };
+		BAEFC1FB1D436194000A3AED /* LTCharacterLimbo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterLimbo.swift; sourceTree = "<group>"; };
+		BAEFC1FC1D436194000A3AED /* LTEasing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEasing.swift; sourceTree = "<group>"; };
+		BAEFC1FD1D436194000A3AED /* LTEmitterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEmitterView.swift; sourceTree = "<group>"; };
+		BAEFC1FE1D436194000A3AED /* LTMorphingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingEffect.swift; sourceTree = "<group>"; };
+		BAEFC1FF1D436194000A3AED /* LTMorphingLabel+Anvil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Anvil.swift"; sourceTree = "<group>"; };
+		BAEFC2001D436194000A3AED /* LTMorphingLabel+Burn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Burn.swift"; sourceTree = "<group>"; };
+		BAEFC2011D436194000A3AED /* LTMorphingLabel+Evaporate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Evaporate.swift"; sourceTree = "<group>"; };
+		BAEFC2021D436194000A3AED /* LTMorphingLabel+Fall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Fall.swift"; sourceTree = "<group>"; };
+		BAEFC2031D436194000A3AED /* LTMorphingLabel+Pixelate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Pixelate.swift"; sourceTree = "<group>"; };
+		BAEFC2041D436194000A3AED /* LTMorphingLabel+Sparkle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Sparkle.swift"; sourceTree = "<group>"; };
+		BAEFC2051D436194000A3AED /* LTMorphingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMorphingLabel.h; sourceTree = "<group>"; };
+		BAEFC2061D436194000A3AED /* LTMorphingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingLabel.swift; sourceTree = "<group>"; };
+		BAEFC2071D436194000A3AED /* LTStringDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTStringDiffResult.swift; sourceTree = "<group>"; };
+		BAEFC2091D436194000A3AED /* Fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fire.png; sourceTree = "<group>"; };
+		BAEFC20A1D436194000A3AED /* Fragment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fragment.png; sourceTree = "<group>"; };
+		BAEFC20B1D436194000A3AED /* Smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Smoke.png; sourceTree = "<group>"; };
+		BAEFC20C1D436194000A3AED /* Sparkle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparkle.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +186,7 @@
 		BA9B7B3D1D353134007ACA82 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				BAEFC1F81D436194000A3AED /* LTMorphingLabel */,
 				BA9B7B3E1D353157007ACA82 /* Date.swift */,
 			);
 			path = utils;
@@ -162,6 +198,39 @@
 				BAB6829F1D37A996005ED69B /* DomElement.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		BAEFC1F81D436194000A3AED /* LTMorphingLabel */ = {
+			isa = PBXGroup;
+			children = (
+				BAEFC1FA1D436194000A3AED /* LTCharacterDiffResult.swift */,
+				BAEFC1FB1D436194000A3AED /* LTCharacterLimbo.swift */,
+				BAEFC1FC1D436194000A3AED /* LTEasing.swift */,
+				BAEFC1FD1D436194000A3AED /* LTEmitterView.swift */,
+				BAEFC1FE1D436194000A3AED /* LTMorphingEffect.swift */,
+				BAEFC1FF1D436194000A3AED /* LTMorphingLabel+Anvil.swift */,
+				BAEFC2001D436194000A3AED /* LTMorphingLabel+Burn.swift */,
+				BAEFC2011D436194000A3AED /* LTMorphingLabel+Evaporate.swift */,
+				BAEFC2021D436194000A3AED /* LTMorphingLabel+Fall.swift */,
+				BAEFC2031D436194000A3AED /* LTMorphingLabel+Pixelate.swift */,
+				BAEFC2041D436194000A3AED /* LTMorphingLabel+Sparkle.swift */,
+				BAEFC2051D436194000A3AED /* LTMorphingLabel.h */,
+				BAEFC2061D436194000A3AED /* LTMorphingLabel.swift */,
+				BAEFC2071D436194000A3AED /* LTStringDiffResult.swift */,
+				BAEFC2081D436194000A3AED /* Particles */,
+			);
+			path = LTMorphingLabel;
+			sourceTree = "<group>";
+		};
+		BAEFC2081D436194000A3AED /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				BAEFC2091D436194000A3AED /* Fire.png */,
+				BAEFC20A1D436194000A3AED /* Fragment.png */,
+				BAEFC20B1D436194000A3AED /* Smoke.png */,
+				BAEFC20C1D436194000A3AED /* Sparkle.png */,
+			);
+			path = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,9 +337,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAEFC21E1D436194000A3AED /* Sparkle.png in Resources */,
+				BAEFC21C1D436194000A3AED /* Fragment.png in Resources */,
 				BA36CBC71D3B04340087523E /* test.html in Resources */,
 				BA9B7B1A1D352F0C007ACA82 /* LaunchScreen.storyboard in Resources */,
+				BAEFC21D1D436194000A3AED /* Smoke.png in Resources */,
 				BA9B7B171D352F0C007ACA82 /* Assets.xcassets in Resources */,
+				BAEFC21B1D436194000A3AED /* Fire.png in Resources */,
 				BA9B7B151D352F0C007ACA82 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,12 +369,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAEFC2181D436194000A3AED /* LTMorphingLabel+Sparkle.swift in Sources */,
 				BA9B7B121D352F0C007ACA82 /* ViewController.swift in Sources */,
+				BAEFC2161D436194000A3AED /* LTMorphingLabel+Fall.swift in Sources */,
+				BAEFC20F1D436194000A3AED /* LTCharacterLimbo.swift in Sources */,
 				BAB682A01D37A996005ED69B /* DomElement.swift in Sources */,
+				BAEFC2171D436194000A3AED /* LTMorphingLabel+Pixelate.swift in Sources */,
+				BAEFC2121D436194000A3AED /* LTMorphingEffect.swift in Sources */,
+				BAEFC20E1D436194000A3AED /* LTCharacterDiffResult.swift in Sources */,
 				BAEFC1F71D431942000A3AED /* AccountViewController.swift in Sources */,
+				BAEFC2151D436194000A3AED /* LTMorphingLabel+Evaporate.swift in Sources */,
+				BAEFC21A1D436194000A3AED /* LTStringDiffResult.swift in Sources */,
+				BAEFC2191D436194000A3AED /* LTMorphingLabel.swift in Sources */,
+				BAEFC2111D436194000A3AED /* LTEmitterView.swift in Sources */,
 				BA9B7B3F1D353157007ACA82 /* Date.swift in Sources */,
 				BA2A40651D38631D006B6409 /* appConf.swift in Sources */,
 				BA9B7B101D352F0C007ACA82 /* AppDelegate.swift in Sources */,
+				BAEFC2101D436194000A3AED /* LTEasing.swift in Sources */,
+				BAEFC2141D436194000A3AED /* LTMorphingLabel+Burn.swift in Sources */,
+				BAEFC2131D436194000A3AED /* LTMorphingLabel+Anvil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

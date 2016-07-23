@@ -8,14 +8,38 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate, LTMorphingLabelDelegate {
 
     @IBOutlet weak var webview: UIWebView!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var webviewContainer: UIView!
+    @IBOutlet weak var textLabel: LTMorphingLabel!
+    @IBOutlet weak var stateView: UIView!
+    
+    private var i = -1
+    private var textArray = [
+        "What is design?",
+        "Design", "Design is not just", "what it looks like", "and feels like.",
+        "Design", "is how it works.", "- Steve Jobs",
+        "Older people", "sit down and ask,", "'What is it?'",
+        "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs",
+        "", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini",
+        "MacBook Pro🔥", "Mac Pro⚡️",
+        "爱老婆",
+        "老婆和女儿"
+    ]
+    private var text: String {
+        i = i >= textArray.count - 1 ? 0 : i + 1
+        return textArray[i]
+    }
+    
+    @IBAction func onTestButtonClicked(sender: UIButton) {
+        textLabel.text = text
+    }
     
     var counter = 0
     var oneAppCounter = 0
+    
     var memberArr: NSArray? = []
     let members: NSArray = ["Li Xufei",
         "Zhang Mingyun",
@@ -37,6 +61,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        textLabel.delegate = self
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
         self.checkAccountInfo() ? self.refresh() : self.gotoAccountViewController()

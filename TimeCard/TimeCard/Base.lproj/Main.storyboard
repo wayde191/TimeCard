@@ -94,10 +94,32 @@
                                     <constraint firstAttribute="bottom" secondItem="wi0-IT-oyJ" secondAttribute="bottom" id="fj4-JY-hOy"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0aL-bo-BsY">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z8-UA-FrU" customClass="LTMorphingLabel" customModule="TimeCard" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="46" width="304" height="73"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta3-1z-Oik">
+                                        <rect key="frame" x="137" y="193" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="onTestButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SZh-g8-s4Y"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0aL-bo-BsY" secondAttribute="trailing" id="1Uu-KQ-ls3"/>
                             <constraint firstAttribute="trailing" secondItem="idO-F5-Cvy" secondAttribute="trailing" id="6mB-oR-QX2"/>
+                            <constraint firstItem="0aL-bo-BsY" firstAttribute="top" secondItem="o5N-QS-ZTh" secondAttribute="bottom" id="85e-7M-ikM"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0aL-bo-BsY" secondAttribute="bottom" id="BfZ-8D-pIc"/>
                             <constraint firstItem="o5N-QS-ZTh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="GBs-MK-gTq"/>
                             <constraint firstAttribute="trailing" secondItem="Abw-4i-EuZ" secondAttribute="trailing" id="JTU-1U-pxM"/>
                             <constraint firstItem="Abw-4i-EuZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Mpc-9N-44R"/>
@@ -105,6 +127,7 @@
                             <constraint firstItem="idO-F5-Cvy" firstAttribute="top" secondItem="o5N-QS-ZTh" secondAttribute="bottom" constant="8" id="TT1-EZ-3Xj"/>
                             <constraint firstAttribute="trailing" secondItem="o5N-QS-ZTh" secondAttribute="trailing" id="VfL-76-m57"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Abw-4i-EuZ" secondAttribute="bottom" id="XWu-Uo-6qg"/>
+                            <constraint firstItem="0aL-bo-BsY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qhU-oF-R8U"/>
                             <constraint firstItem="Abw-4i-EuZ" firstAttribute="top" secondItem="o5N-QS-ZTh" secondAttribute="bottom" constant="8" id="sho-5g-f0a"/>
                             <constraint firstItem="o5N-QS-ZTh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tRR-Ty-RwR"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="idO-F5-Cvy" secondAttribute="bottom" id="xLB-bN-8aS"/>
@@ -112,7 +135,9 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="stateView" destination="0aL-bo-BsY" id="Vfh-qR-HSa"/>
                         <outlet property="tableview" destination="qkh-zV-9Ex" id="vSm-G6-jAh"/>
+                        <outlet property="textLabel" destination="4z8-UA-FrU" id="oLY-v2-8Je"/>
                         <outlet property="webview" destination="wi0-IT-oyJ" id="T2b-hI-ZaN"/>
                         <outlet property="webviewContainer" destination="idO-F5-Cvy" id="iLz-oE-rBX"/>
                     </connections>
