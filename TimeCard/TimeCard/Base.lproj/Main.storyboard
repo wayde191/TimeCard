@@ -31,7 +31,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="gYC-cj-Tpr" kind="presentation" id="Pu4-4c-Kc1"/>
+                                            <segue destination="gYC-cj-Tpr" kind="presentation" identifier="AccountViewControllerIdentifier" id="Pu4-4c-Kc1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0N-fo-5ZL">

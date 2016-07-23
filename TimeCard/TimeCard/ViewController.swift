@@ -39,7 +39,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
-        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
+        self.checkAccountInfo() ? self.refresh() : self.gotoAccountViewController()
         
         print(NSDate.getTodayWeekStr())
         print(NSDate.get(.Next, "Sunday", considerToday:  true))
@@ -48,6 +48,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    //MARK: Public Methods
+    func refresh() {
+        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
+    }
+    
+    func gotoAccountViewController() {
+        self.performSegueWithIdentifier("AccountViewControllerIdentifier", sender: self)
+    }
+    
+    //MARK: Private Methods
+    
+    private func checkAccountInfo() -> Bool {
+        var result = true
+        
+        if STANDER_USER_DEFAULT.objectForKey(USERNAME_UD_KEY) == nil {
+            result = false;
+        } else if STANDER_USER_DEFAULT.objectForKey(SECRET_UD_KEY) == nil {
+            result = false;
+        } else if STANDER_USER_DEFAULT.objectForKey(PROJECT_ONAME_UD_KEY) == nil {
+            result = false;
+        } else if STANDER_USER_DEFAULT.objectForKey(PROJECT_NAME_UD_KEY) == nil {
+            result = false;
+        }
+        
+        return result
     }
     
     //MARK: UITableView DataSource and Delegate
