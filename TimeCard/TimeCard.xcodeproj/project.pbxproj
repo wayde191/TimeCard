@@ -36,6 +36,12 @@
 		BAEFC21C1D436194000A3AED /* Fragment.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEFC20A1D436194000A3AED /* Fragment.png */; };
 		BAEFC21D1D436194000A3AED /* Smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEFC20B1D436194000A3AED /* Smoke.png */; };
 		BAEFC21E1D436194000A3AED /* Sparkle.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEFC20C1D436194000A3AED /* Sparkle.png */; };
+		BAEFC2201D4375ED000A3AED /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC21F1D4375ED000A3AED /* Colors.swift */; };
+		BAEFC2271D4375F7000A3AED /* ArcLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2221D4375F7000A3AED /* ArcLayer.swift */; };
+		BAEFC2281D4375F7000A3AED /* HolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2231D4375F7000A3AED /* HolderView.swift */; };
+		BAEFC2291D4375F7000A3AED /* OvalLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2241D4375F7000A3AED /* OvalLayer.swift */; };
+		BAEFC22A1D4375F7000A3AED /* RectangleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2251D4375F7000A3AED /* RectangleLayer.swift */; };
+		BAEFC22B1D4375F7000A3AED /* TriangleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC2261D4375F7000A3AED /* TriangleLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +98,12 @@
 		BAEFC20A1D436194000A3AED /* Fragment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fragment.png; sourceTree = "<group>"; };
 		BAEFC20B1D436194000A3AED /* Smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Smoke.png; sourceTree = "<group>"; };
 		BAEFC20C1D436194000A3AED /* Sparkle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparkle.png; sourceTree = "<group>"; };
+		BAEFC21F1D4375ED000A3AED /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		BAEFC2221D4375F7000A3AED /* ArcLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcLayer.swift; sourceTree = "<group>"; };
+		BAEFC2231D4375F7000A3AED /* HolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HolderView.swift; sourceTree = "<group>"; };
+		BAEFC2241D4375F7000A3AED /* OvalLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OvalLayer.swift; sourceTree = "<group>"; };
+		BAEFC2251D4375F7000A3AED /* RectangleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleLayer.swift; sourceTree = "<group>"; };
+		BAEFC2261D4375F7000A3AED /* TriangleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				BAEFC1F81D436194000A3AED /* LTMorphingLabel */,
+				BAEFC2211D4375F7000A3AED /* Layers */,
+				BAEFC21F1D4375ED000A3AED /* Colors.swift */,
 				BA9B7B3E1D353157007ACA82 /* Date.swift */,
 			);
 			path = utils;
@@ -231,6 +245,18 @@
 				BAEFC20C1D436194000A3AED /* Sparkle.png */,
 			);
 			path = Particles;
+			sourceTree = "<group>";
+		};
+		BAEFC2211D4375F7000A3AED /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				BAEFC2221D4375F7000A3AED /* ArcLayer.swift */,
+				BAEFC2231D4375F7000A3AED /* HolderView.swift */,
+				BAEFC2241D4375F7000A3AED /* OvalLayer.swift */,
+				BAEFC2251D4375F7000A3AED /* RectangleLayer.swift */,
+				BAEFC2261D4375F7000A3AED /* TriangleLayer.swift */,
+			);
+			path = Layers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,7 +396,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAEFC2181D436194000A3AED /* LTMorphingLabel+Sparkle.swift in Sources */,
+				BAEFC2201D4375ED000A3AED /* Colors.swift in Sources */,
 				BA9B7B121D352F0C007ACA82 /* ViewController.swift in Sources */,
+				BAEFC2291D4375F7000A3AED /* OvalLayer.swift in Sources */,
 				BAEFC2161D436194000A3AED /* LTMorphingLabel+Fall.swift in Sources */,
 				BAEFC20F1D436194000A3AED /* LTCharacterLimbo.swift in Sources */,
 				BAB682A01D37A996005ED69B /* DomElement.swift in Sources */,
@@ -378,15 +406,19 @@
 				BAEFC2121D436194000A3AED /* LTMorphingEffect.swift in Sources */,
 				BAEFC20E1D436194000A3AED /* LTCharacterDiffResult.swift in Sources */,
 				BAEFC1F71D431942000A3AED /* AccountViewController.swift in Sources */,
+				BAEFC22B1D4375F7000A3AED /* TriangleLayer.swift in Sources */,
 				BAEFC2151D436194000A3AED /* LTMorphingLabel+Evaporate.swift in Sources */,
 				BAEFC21A1D436194000A3AED /* LTStringDiffResult.swift in Sources */,
 				BAEFC2191D436194000A3AED /* LTMorphingLabel.swift in Sources */,
 				BAEFC2111D436194000A3AED /* LTEmitterView.swift in Sources */,
 				BA9B7B3F1D353157007ACA82 /* Date.swift in Sources */,
 				BA2A40651D38631D006B6409 /* appConf.swift in Sources */,
+				BAEFC22A1D4375F7000A3AED /* RectangleLayer.swift in Sources */,
 				BA9B7B101D352F0C007ACA82 /* AppDelegate.swift in Sources */,
 				BAEFC2101D436194000A3AED /* LTEasing.swift in Sources */,
+				BAEFC2271D4375F7000A3AED /* ArcLayer.swift in Sources */,
 				BAEFC2141D436194000A3AED /* LTMorphingLabel+Burn.swift in Sources */,
+				BAEFC2281D4375F7000A3AED /* HolderView.swift in Sources */,
 				BAEFC2131D436194000A3AED /* LTMorphingLabel+Anvil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
