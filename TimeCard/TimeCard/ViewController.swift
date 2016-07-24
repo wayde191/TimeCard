@@ -66,6 +66,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func animateLabel() {
         holderView.removeFromSuperview()
+        self.showResult()
         
         tabviewContainer.transform = CGAffineTransformScale(tabviewContainer.transform, 0.25, 0.25)
         UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.CurveEaseInOut,
@@ -97,7 +98,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     private func showResult() {
         memberArr = self.domElementModel?.getAllInfo((self.domElementModel?.timecardHTML)! as String)
-        self.webviewContainer.hidden = true
         self.tableview.reloadData()
     }
     
