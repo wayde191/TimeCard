@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var webviewContainer: UIView!
     @IBOutlet weak var textLabel: LTMorphingLabel!
     @IBOutlet weak var stateView: UIView!
+    @IBOutlet weak var tabviewContainer: UIView!
     
     var holderView = HolderView(frame: CGRectZero)
     
@@ -34,29 +35,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         "Li Hongjing"]
     var domElementModel: DomElement?
     
-    func animateLabel() {
-        // 1
-        holderView.removeFromSuperview()
-        stateView.backgroundColor = Colors.blue
-        
-        // 2
-        let label: UILabel = UILabel(frame: view.frame)
-        label.textColor = Colors.white
-        label.font = UIFont(name: "HelveticaNeue-Thin", size: 170.0)
-        label.textAlignment = NSTextAlignment.Center
-        label.text = "S"
-        label.transform = CGAffineTransformScale(label.transform, 0.25, 0.25)
-        stateView.addSubview(label)
-        
-        // 3
-        UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.CurveEaseInOut,
-            animations: ({
-                label.transform = CGAffineTransformScale(label.transform, 4.0, 4.0)
-            }), completion: { finished in
-                print("Done")
-        })
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,10 +42,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
         self.checkAccountInfo() ? self.refresh() : self.gotoAccountViewController()
-        
-        print(NSDate.getTodayWeekStr())
-        print(NSDate.get(.Next, "Sunday", considerToday:  true))
-        print(NSDate.get(.Previous, "Thursday", considerToday:  true))
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,6 +52,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func refresh() {
         self.addHolderView()
         self.setStage(Stage.ready)
+        self.domElementModel?.updateUserInfo()
         webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
     }
     
@@ -87,6 +62,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func analyzeDone() {
         self.setStage(Stage.done)
+    }
+    
+    func animateLabel() {
+        holderView.removeFromSuperview()
+        
+        tabviewContainer.transform = CGAffineTransformScale(tabviewContainer.transform, 0.25, 0.25)
+        UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.CurveEaseInOut,
+            animations: ({
+                self.view.bringSubviewToFront(self.tabviewContainer)
+                self.tabviewContainer.transform = CGAffineTransformScale(self.tabviewContainer.transform, 4.0, 4.0)
+            }), completion: { finished in
+                print("Done")
+        })
     }
     
     //MARK: Private Methods
@@ -115,12 +103,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: HolderView
     func addHolderView() {
-        let boxSize: CGFloat = 200.0
-        holderView.frame = CGRect(x: view.bounds.width / 2 - boxSize / 2,
-            y: view.bounds.height / 2 - boxSize / 2,
+        print(stateView.bounds)
+        let boxSize: CGFloat = 100.0
+        holderView.frame = CGRect(
+            x: view.bounds.width / 2 - boxSize / 2,
+            y: textLabel.frame.origin.y + 80,
             width: boxSize,
             height: boxSize)
-        holderView.parentFrame = stateView.frame
+        holderView.parentFrame = view.frame
         holderView.delegate = self
         stateView.addSubview(holderView)
     }

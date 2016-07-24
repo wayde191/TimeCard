@@ -98,20 +98,31 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z8-UA-FrU" customClass="LTMorphingLabel" customModule="TimeCard" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="304" height="97"/>
+                                        <rect key="frame" x="8" y="77" width="304" height="97"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="97" id="FRu-Qq-1wb"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="dks-MP-cmG">
+                                        <rect key="frame" x="37" y="379" width="246" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="246" id="QU8-Zo-bl1"/>
+                                            <constraint firstAttribute="height" constant="37" id="lV9-yx-t1R"/>
+                                        </constraints>
+                                        <color key="pageIndicatorTintColor" red="0.89411764709999997" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="currentPageIndicatorTintColor" red="0.66739692176526311" green="0.61501326267894729" blue="0.82505905732631457" alpha="1" colorSpace="calibratedRGB"/>
+                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="4z8-UA-FrU" firstAttribute="leading" secondItem="0aL-bo-BsY" secondAttribute="leading" constant="8" id="DBO-J9-Dzq"/>
                                     <constraint firstAttribute="trailing" secondItem="4z8-UA-FrU" secondAttribute="trailing" constant="8" id="QE4-y9-ShN"/>
-                                    <constraint firstItem="4z8-UA-FrU" firstAttribute="top" secondItem="0aL-bo-BsY" secondAttribute="top" constant="8" id="yh5-Ve-Yyz"/>
+                                    <constraint firstAttribute="bottom" secondItem="dks-MP-cmG" secondAttribute="bottom" id="Vdd-b7-7KE"/>
+                                    <constraint firstItem="dks-MP-cmG" firstAttribute="centerX" secondItem="0aL-bo-BsY" secondAttribute="centerX" id="wMw-LZ-L9j"/>
+                                    <constraint firstItem="4z8-UA-FrU" firstAttribute="top" secondItem="0aL-bo-BsY" secondAttribute="top" constant="77" id="yh5-Ve-Yyz"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -138,6 +149,7 @@
                     <connections>
                         <outlet property="stateView" destination="0aL-bo-BsY" id="Vfh-qR-HSa"/>
                         <outlet property="tableview" destination="qkh-zV-9Ex" id="vSm-G6-jAh"/>
+                        <outlet property="tabviewContainer" destination="Abw-4i-EuZ" id="tIV-FS-G1w"/>
                         <outlet property="textLabel" destination="4z8-UA-FrU" id="oLY-v2-8Je"/>
                         <outlet property="webview" destination="wi0-IT-oyJ" id="T2b-hI-ZaN"/>
                         <outlet property="webviewContainer" destination="idO-F5-Cvy" id="iLz-oE-rBX"/>

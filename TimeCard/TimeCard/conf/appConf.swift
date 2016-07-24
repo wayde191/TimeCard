@@ -22,7 +22,7 @@ let STANDER_USER_DEFAULT    = NSUserDefaults.standardUserDefaults()
 
 struct Stage {
     static let ready = "Ready, Go!"
-    static let login = "Logging into Salesfirce..."
+    static let login = "Logging into Salesforce..."
     static let search = "Searching for your project..."
     static let project = "Project matching..."
     static let timecard = "Analyzing timecard..."

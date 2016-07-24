@@ -77,6 +77,20 @@ extension NSDate {
         return date!
     }
     
+    class func getLastFridayStr() -> String {
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-M-dd"
+        let today = NSDate.get(.Previous, "Friday", considerToday:  true)
+        return self.getDayOfWeek(formatter.stringFromDate(today))
+    }
+    
+    class func getLastMondayStr() -> String {
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-M-dd"
+        let today = NSDate.get(.Previous, "Monday", considerToday:  true)
+        return self.getDayOfWeek(formatter.stringFromDate(today))
+    }
+    
     class func getDayOfWeek(today:String) -> String {
         let formatter  = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

@@ -21,17 +21,31 @@ class DomElement: NSObject {
     var webview: UIWebView
     var timecardHTML = ""
     
+    var ud_username: String?
+    var ud_password: String?
+    var ud_pname: String?
+    var ud_poname: String?
+    
     init(name: String, webview: UIWebView) {
         self.name = name
         self.webview = webview
     }
     
+    func updateUserInfo() {
+        ud_username = STANDER_USER_DEFAULT.objectForKey(USERNAME_UD_KEY) as? String
+        ud_password = STANDER_USER_DEFAULT.objectForKey(SECRET_UD_KEY) as? String
+        ud_pname = STANDER_USER_DEFAULT.objectForKey(PROJECT_NAME_UD_KEY) as? String
+        ud_poname = STANDER_USER_DEFAULT.objectForKey(PROJECT_ONAME_UD_KEY) as? String
+    }
+    
     func getAllInfo(text: String) -> NSArray{
         let members = NSMutableArray()
         
+        let lastMon = NSDate.getLastMondayStr()
+        
         let arr = text.componentsSeparatedByString("dark actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
         for record in arr {
-            if record.containsString("2016-7-18") {
+            if record.containsString(lastMon) {
                 do {
                     let rows = record.componentsSeparatedByString("tableRowGroup")
                     var contextStr = ""
@@ -61,7 +75,7 @@ class DomElement: NSObject {
     }
     
     func doLogin() {
-        let script = "document.getElementById('password').value='??@2015!';"
+        let script = "document.getElementById('password').value='\(ud_password)';"
             + "document.getElementById('Login').click();"
         self.webview.stringByEvaluatingJavaScriptFromString(script)
     }
@@ -69,7 +83,7 @@ class DomElement: NSObject {
     func searchProject() {
         self.webview.stringByEvaluatingJavaScriptFromString(
             "var ele = document.getElementsByClassName('searchInputField')[0];" +
-                "ele.value = 'demand';ele.focus();var ke3 = document.createEvent('Events');ke3.initEvent('keypress', true, true);ke3.keyCode = ke3.which = 13;        ele.dispatchEvent(ke3);")
+                "ele.value = '\(ud_pname)';ele.focus();var ke3 = document.createEvent('Events');ke3.initEvent('keypress', true, true);ke3.keyCode = ke3.which = 13;        ele.dispatchEvent(ke3);")
     }
     
     func clickRelated() {
@@ -93,7 +107,7 @@ class DomElement: NSObject {
         arr.removeAtIndex(0)
         
         for project in arr {
-            if project.containsString("Demand") && project.containsString("Waters Meaghan Rose") {
+            if project.containsString(ud_pname!) && project.containsString(ud_poname!) {
                 index = arr.indexOf(project)!
             }
         }
