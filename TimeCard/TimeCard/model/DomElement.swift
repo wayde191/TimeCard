@@ -61,7 +61,7 @@ class DomElement: NSObject {
     }
     
     func doLogin() {
-        let script = "document.getElementById('password').value='?@2015!';"
+        let script = "document.getElementById('password').value='??@2015!';"
             + "document.getElementById('Login').click();"
         self.webview.stringByEvaluatingJavaScriptFromString(script)
     }

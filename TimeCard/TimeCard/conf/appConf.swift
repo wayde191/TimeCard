@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 let SALESFORCE_LOGIN_URL    = "https://login.salesforce.com/"
 let SALESFORCE_ONE_APP_URL  = "https://na32.lightning.force.com/one/one.app"
@@ -19,4 +20,11 @@ let PROJECT_ONAME_UD_KEY    = "ProjectOwnerNameUserDefaultKey"
 
 let STANDER_USER_DEFAULT    = NSUserDefaults.standardUserDefaults()
 
-
+struct Stage {
+    static let ready = "Ready, Go!"
+    static let login = "Logging into Salesfirce..."
+    static let search = "Searching for your project..."
+    static let project = "Project matching..."
+    static let timecard = "Analyzing timecard..."
+    static let done = "Done!"
+}

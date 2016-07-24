@@ -18,27 +18,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var holderView = HolderView(frame: CGRectZero)
     
-    private var i = -1
-    private var textArray = [
-        "What is design?",
-        "Design", "Design is not just", "what it looks like", "and feels like.",
-        "Design", "is how it works.", "- Steve Jobs",
-        "Older people", "sit down and ask,", "'What is it?'",
-        "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs",
-        "", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini",
-        "MacBook Pro🔥", "Mac Pro⚡️",
-        "爱老婆",
-        "老婆和女儿"
-    ]
-    private var text: String {
-        i = i >= textArray.count - 1 ? 0 : i + 1
-        return textArray[i]
-    }
-    
-    @IBAction func onTestButtonClicked(sender: UIButton) {
-        textLabel.text = text
-    }
-    
     var counter = 0
     var oneAppCounter = 0
     
@@ -54,24 +33,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         "Chen Ting",
         "Li Hongjing"]
     var domElementModel: DomElement?
-    
-    func showResult() {
-        memberArr = self.domElementModel?.getAllInfo((self.domElementModel?.timecardHTML)! as String)
-        self.webviewContainer.hidden = true
-        self.tableview.reloadData()
-    }
-    
-    func addHolderView() {
-        let boxSize: CGFloat = 100.0
-        holderView.frame = CGRect(x: view.bounds.width / 2 - boxSize / 2,
-            y: view.bounds.height / 2 - boxSize / 2,
-            width: boxSize,
-            height: boxSize)
-        holderView.parentFrame = view.frame
-        holderView.delegate = self
-        view.addSubview(holderView)
-        holderView.addOval()
-    }
     
     func animateLabel() {
         // 1
@@ -101,7 +62,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         textLabel.delegate = self
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
-        addHolderView()
         
         self.checkAccountInfo() ? self.refresh() : self.gotoAccountViewController()
         
@@ -116,11 +76,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: Public Methods
     func refresh() {
+        self.addHolderView()
+        self.setStage(Stage.ready)
         webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
     }
     
     func gotoAccountViewController() {
         self.performSegueWithIdentifier("AccountViewControllerIdentifier", sender: self)
+    }
+    
+    func analyzeDone() {
+        self.setStage(Stage.done)
     }
     
     //MARK: Private Methods
@@ -139,6 +105,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         return result
+    }
+    
+    private func showResult() {
+        memberArr = self.domElementModel?.getAllInfo((self.domElementModel?.timecardHTML)! as String)
+        self.webviewContainer.hidden = true
+        self.tableview.reloadData()
+    }
+    
+    //MARK: HolderView
+    func addHolderView() {
+        let boxSize: CGFloat = 200.0
+        holderView.frame = CGRect(x: view.bounds.width / 2 - boxSize / 2,
+            y: view.bounds.height / 2 - boxSize / 2,
+            width: boxSize,
+            height: boxSize)
+        holderView.parentFrame = stateView.frame
+        holderView.delegate = self
+        stateView.addSubview(holderView)
+    }
+    
+    //MARK: Animation
+    func setStage(stage: String) {
+        self.textLabel.text = stage
+        if stage == Stage.ready {
+            holderView.addOval()
+        } else if stage == Stage.done {
+            holderView.stopOval()
+            holderView.drawArc()
+        }
     }
     
     //MARK: UITableView DataSource and Delegate
@@ -195,13 +190,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             counter++
             print(counter)
             if counter == 5 {
+                self.setStage(Stage.login)
                 domElementModel?.doLogin()
             }
         } else if rurl == SALESFORCE_ONE_APP_URL {
             oneAppCounter++
-            print(oneAppCounter)
             if 1 == oneAppCounter
             {
+                self.setStage(Stage.search)
                 domElementModel?.findElementByClassNameUntil("toggleNav", timesLeft: 5,
                     callback: { (result: Bool) -> () in
                         if result == true {
@@ -209,10 +205,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             self.domElementModel?.findElementByClassNameUntil("selectorItem", timesLeft: 5,
                                 callback: { (found) -> () in
                                     if found == true {
+                                        self.setStage(Stage.project)
                                         self.domElementModel?.clickProjectItem()
                                         self.domElementModel?.findElementByClassNameUntil("listContent", timesLeft: 5,
                                             callback: { (found) -> () in
                                                 if found == true {
+                                                    self.setStage(Stage.timecard)
                                                     self.domElementModel?.clickProjectFound()
                                                     self.domElementModel?.findElementByClassNameUntil("nav-container", timesLeft: 5,
                                                         callback: { (found) -> () in
@@ -221,7 +219,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                                                 self.domElementModel?.triggerEvent("clickRelatedTimeCard", afterDelay: 1)
                                                                 self.domElementModel?.triggerEvent("getListHtml", afterDelay: 3)
                                                                 
-                                                                self.performSelector(NSSelectorFromString("showResult"), withObject: nil, afterDelay: 5.0)
+                                                                self.performSelector(NSSelectorFromString("analyzeDone"), withObject: nil, afterDelay: 4.0)
 
                                                             }
                                                     })
