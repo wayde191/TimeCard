@@ -38,7 +38,7 @@ class DomElement: NSObject {
         ud_poname = STANDER_USER_DEFAULT.objectForKey(PROJECT_ONAME_UD_KEY) as? String
     }
     
-    func getAllInfo(text: String) -> NSArray{
+    func getAllInfo(text: String) -> NSArray {
         let members = NSMutableArray()
         
         let lastMon = NSDate.getLastMondayStr()
@@ -75,15 +75,17 @@ class DomElement: NSObject {
     }
     
     func doLogin() {
-        let script = "document.getElementById('password').value='\(ud_password)';"
+        let script = "document.getElementById('password').value='"
+            + ud_password! + "';"
             + "document.getElementById('Login').click();"
         self.webview.stringByEvaluatingJavaScriptFromString(script)
     }
     
     func searchProject() {
         self.webview.stringByEvaluatingJavaScriptFromString(
-            "var ele = document.getElementsByClassName('searchInputField')[0];" +
-                "ele.value = '\(ud_pname)';ele.focus();var ke3 = document.createEvent('Events');ke3.initEvent('keypress', true, true);ke3.keyCode = ke3.which = 13;        ele.dispatchEvent(ke3);")
+            "var ele = document.getElementsByClassName('searchInputField')[0];"
+                + "ele.value = '" + ud_pname! + "';"
+                + "ele.focus();var ke3 = document.createEvent('Events');ke3.initEvent('keypress', true, true);ke3.keyCode = ke3.which = 13;        ele.dispatchEvent(ke3);")
     }
     
     func clickRelated() {

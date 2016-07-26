@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var textLabel: LTMorphingLabel!
     @IBOutlet weak var stateView: UIView!
     @IBOutlet weak var tabviewContainer: UIView!
+    @IBOutlet weak var pagecontrolView: UIPageControl!
     
     var holderView = HolderView(frame: CGRectZero)
     
@@ -50,6 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: Public Methods
     func refresh() {
+        counter = 0
         self.addHolderView()
         self.setStage(Stage.ready)
         self.domElementModel?.updateUserInfo()
@@ -103,11 +105,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: HolderView
     func addHolderView() {
-        print(stateView.bounds)
         let boxSize: CGFloat = 100.0
         holderView.frame = CGRect(
             x: view.bounds.width / 2 - boxSize / 2,
-            y: textLabel.frame.origin.y + 80,
+            y: textLabel.frame.origin.y + 150,
             width: boxSize,
             height: boxSize)
         holderView.parentFrame = view.frame
@@ -118,11 +119,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Animation
     func setStage(stage: String) {
         self.textLabel.text = stage
-        if stage == Stage.ready {
+        switch stage {
+        case Stage.ready:
             holderView.addOval()
-        } else if stage == Stage.done {
+            holderView.ovalLayer.fillColor = Colors.LightSkyBlue.CGColor
+            break
+        case Stage.login:
+            pagecontrolView.currentPage = 1
+            holderView.ovalLayer.fillColor = Colors.SkyBlue.CGColor
+            break
+        case Stage.search:
+            pagecontrolView.currentPage = 2
+            holderView.ovalLayer.fillColor = Colors.DeepSkyBlue.CGColor
+            break
+        case Stage.project:
+            pagecontrolView.currentPage = 3
+            holderView.ovalLayer.fillColor = Colors.DodgerBlue.CGColor
+            break
+        case Stage.timecard:
+            pagecontrolView.currentPage = 4
+            holderView.ovalLayer.fillColor = Colors.RoyalBlue.CGColor
+            break
+        case Stage.done:
+            pagecontrolView.currentPage = 5
+            holderView.ovalLayer.fillColor = Colors.TCBlue.CGColor
             holderView.stopOval()
             holderView.drawArc()
+            break
+        default:
+            break
         }
     }
     

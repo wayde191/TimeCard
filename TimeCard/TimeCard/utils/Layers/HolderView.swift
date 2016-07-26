@@ -52,7 +52,7 @@ class HolderView: UIView {
     func drawArc() {
         layer.addSublayer(arcLayer)
         arcLayer.animate()
-        NSTimer.scheduledTimerWithTimeInterval(0.90, target: self, selector: "expandView",
+        NSTimer.scheduledTimerWithTimeInterval(1.90, target: self, selector: "expandView",
           userInfo: nil, repeats: false)
     }
 
