@@ -75,10 +75,10 @@ class DomElement: NSObject {
     }
     
     func doLogin() {
-        let script = "document.getElementById('password').value='"
-            + ud_password! + "';"
-            + "document.getElementById('Login').click();"
-        self.webview.stringByEvaluatingJavaScriptFromString(script)
+        let fillPasswordScript = "document.getElementById('password').value='" + ud_password! + "';"
+        let fillUsernameScript = "document.getElementById('username').value='" + ud_username! + "';"
+        let clickLoginScript = "document.getElementById('Login').click();"
+        self.webview.stringByEvaluatingJavaScriptFromString(fillUsernameScript + fillPasswordScript + clickLoginScript)
     }
     
     func searchProject() {

@@ -103,6 +103,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableview.reloadData()
     }
     
+    private func getSalesforceVerifacationCode() {
+        let alert = UIAlertController.init(title: "Salesforce Verification Code", message: "Please input your verification which Salesforce send to you via email.", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.textColor = Colors.TCBlue
+            textField.placeholder = "Please input your code"
+        }
+        
+        alert.addAction(UIAlertAction.init(title: "Sure", style: UIAlertActionStyle.Destructive,
+            handler: { (alertAction) -> Void in
+                print(alert.textFields?.first?.text)
+        }))
+
+        self.presentViewController(alert, animated: true) { () -> Void in
+            
+        }
+    }
+    
     //MARK: HolderView
     func addHolderView() {
         let boxSize: CGFloat = 100.0
@@ -188,13 +206,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: UIWebView Delegate
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool{
         let rurl =  request.URL?.absoluteString
-        if (rurl!.hasPrefix("ios:")){
-            let method =  rurl!.componentsSeparatedByString("@")[1]
-            if method == "signin_go"{
-                signin_go()
-            }
-            return false
-        }
+        print("shouldStartLoadWithRequest: \(rurl)")
         return true
     }
     
@@ -208,6 +220,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.setStage(Stage.login)
                 domElementModel?.doLogin()
             }
+        } else if ((rurl?.containsString(SALESFORCE_VER_URL)) != nil) {
+            self.getSalesforceVerifacationCode()
         } else if rurl == SALESFORCE_ONE_APP_URL {
             oneAppCounter++
             if 1 == oneAppCounter
@@ -252,11 +266,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let rurl =  webView.request?.URL?.absoluteString
         print(rurl)
         print(error?.userInfo)
-    }
-
-    
-    func signin_go(){
-        NSLog("-我执行了signin_go-")
     }
     
     //MARK: Segue

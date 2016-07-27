@@ -11,6 +11,7 @@ import UIKit
 
 let SALESFORCE_LOGIN_URL    = "https://login.salesforce.com/"
 let SALESFORCE_ONE_APP_URL  = "https://na32.lightning.force.com/one/one.app"
+let SALESFORCE_VER_URL      = "verification/method/EmailVerificationFinishUi"
 
 let USERNAME_UD_KEY         = "UsernameUserDefaultKey"
 let SECRET_UD_KEY           = "SecretUserDefaultKey"
