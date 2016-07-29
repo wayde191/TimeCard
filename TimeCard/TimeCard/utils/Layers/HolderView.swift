@@ -48,22 +48,24 @@ class HolderView: UIView {
     func wobbleOval() {
         ovalTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: ovalLayer, selector: "wobble", userInfo: nil, repeats: true)
     }
+    
+    func drawBlueAnimatedRectangle() {
+        ovalLayer.removeFromSuperlayer()
+        layer.addSublayer(blueRectangleLayer)
+        blueRectangleLayer.animateStrokeWithColor(Colors.blue)
+        NSTimer.scheduledTimerWithTimeInterval(0.40, target: self, selector: "drawArc",
+            userInfo: nil, repeats: false)
+    }
 
     func drawArc() {
         layer.addSublayer(arcLayer)
         arcLayer.animate()
-        NSTimer.scheduledTimerWithTimeInterval(1.90, target: self, selector: "expandView",
+        NSTimer.scheduledTimerWithTimeInterval(1.30, target: self, selector: "expandView",
           userInfo: nil, repeats: false)
     }
 
     func expandView() {
-        backgroundColor = Colors.blue
-        frame = CGRectMake(frame.origin.x - blueRectangleLayer.lineWidth,
-          frame.origin.y - blueRectangleLayer.lineWidth,
-          frame.size.width + blueRectangleLayer.lineWidth * 2,
-          frame.size.height + blueRectangleLayer.lineWidth * 2)
         layer.sublayers = nil
-
         UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
           self.frame = self.parentFrame
           }, completion: { finished in

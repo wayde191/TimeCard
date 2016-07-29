@@ -28,7 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         "Zhang Mingyun",
         "Cao Yangyang",
         "Chen Yu Wuhan Dev",
-        "Jiang Dev Xu",
+        "Xu Jiang Dev",
         "Gu Chao",
         "Sun Wei Wayde",
         "Wang Tianyi",
@@ -166,7 +166,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             pagecontrolView.currentPage = 5
             holderView.ovalLayer.fillColor = Colors.TCBlue.CGColor
             holderView.stopOval()
-            holderView.drawArc()
+            holderView.drawBlueAnimatedRectangle()
             break
         default:
             break
