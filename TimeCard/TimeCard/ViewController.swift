@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var stateView: UIView!
     @IBOutlet weak var tabviewContainer: UIView!
     @IBOutlet weak var pagecontrolView: UIPageControl!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var holderView = HolderView(frame: CGRectZero)
     
@@ -24,6 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var oneAppCounter = 0
     
     var memberArr: NSArray? = []
+    
     let members: NSArray = ["Li Xufei",
         "Zhang Mingyun",
         "Cao Yangyang",
@@ -40,6 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         textLabel.delegate = self
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
+        self.dateLabel.text = "Start Date: " + NSDate.getLastMondayStr()
         
         self.checkAccountInfo() ? self.refresh() : self.gotoAccountViewController()
     }
@@ -197,7 +200,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell?.backgroundColor = UIColor.whiteColor()
 
         } else {
-            cell?.backgroundColor = UIColor.redColor()
+            cell?.backgroundColor = Colors.RoyalBlue
             cell?.accessoryType = UITableViewCellAccessoryType.None
         }
         return cell!
