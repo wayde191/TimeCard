@@ -40,7 +40,6 @@ class DomElement: NSObject {
     
     func getAllInfo(text: String) -> NSArray {
         let members = NSMutableArray()
-        
         let lastMon = NSDate.getLastMondayStr()
         
         let arr = text.componentsSeparatedByString("dark actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
@@ -72,6 +71,12 @@ class DomElement: NSObject {
             }
         }
         return members
+    }
+    
+    func doVerificate(code: String) {
+        let fillCode = "document.getElementById('emc').value='" + code + "';"
+        let clickVerify = "document.getElementById('save').click();"
+        self.webview.stringByEvaluatingJavaScriptFromString(fillCode + clickVerify)
     }
     
     func doLogin() {

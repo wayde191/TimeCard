@@ -88,7 +88,7 @@ extension NSDate {
         let formatter  = NSDateFormatter()
         formatter.dateFormat = "yyyy-M-dd"
         let today = NSDate.get(.Previous, "Monday", considerToday:  true)
-        return self.getDayOfWeek(formatter.stringFromDate(today))
+        return formatter.stringFromDate(today)
     }
     
     class func getDayOfWeek(today:String) -> String {

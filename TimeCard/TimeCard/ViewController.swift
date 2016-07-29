@@ -28,8 +28,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         "Zhang Mingyun",
         "Cao Yangyang",
         "Chen Yu Wuhan Dev",
+        "Jiang Dev Xu",
         "Gu Chao",
-        "Wang Zhi Tupi",
         "Sun Wei Wayde",
         "Wang Tianyi",
         "Chen Ting",
@@ -38,7 +38,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         textLabel.delegate = self
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         
@@ -113,7 +112,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         alert.addAction(UIAlertAction.init(title: "Sure", style: UIAlertActionStyle.Destructive,
             handler: { (alertAction) -> Void in
-                print(alert.textFields?.first?.text)
+                let code = alert.textFields?.first?.text
+                if ((code?.isEmpty) == true) {
+                    self.getSalesforceVerifacationCode()
+                } else {
+                    self.domElementModel?.doVerificate(code!)
+                }
         }))
 
         self.presentViewController(alert, animated: true) { () -> Void in
@@ -220,7 +224,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.setStage(Stage.login)
                 domElementModel?.doLogin()
             }
-        } else if ((rurl?.containsString(SALESFORCE_VER_URL)) != nil) {
+        } else if ((rurl?.containsString(SALESFORCE_VER_URL)) == true) {
             self.getSalesforceVerifacationCode()
         } else if rurl == SALESFORCE_ONE_APP_URL {
             oneAppCounter++
