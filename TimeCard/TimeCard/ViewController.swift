@@ -26,6 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var memberArr: NSArray? = []
     var domElementModel: DomElement?
+    var isRunning: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
         self.dateLabel.text = "Start Date: " + NSDate.getLastMondayStr()
         
-        self.checkAccountInfo() ? self.refresh() : self.gotoAccountViewController()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if isRunning == false {
+            isRunning = true
+            self.checkAccountInfo() ? self.refresh() : self.gotoAccountViewController()
+        }
     }
 
     override func didReceiveMemoryWarning() {

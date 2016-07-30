@@ -22,6 +22,7 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
         self.gobackToHomeVC()
     }
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBAction func onSaveButtonClicked(sender: AnyObject) {
         if self.checkRequiredFields() {
             self.updateUserDefault()
@@ -34,6 +35,11 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.syncUserDefault()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.scrollView.contentSize = CGSize.init(width: self.scrollView.contentSize.width, height: 800)
     }
     
     func syncUserDefault() {
