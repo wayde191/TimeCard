@@ -25,17 +25,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var oneAppCounter = 0
     
     var memberArr: NSArray? = []
-    
-    let members: NSArray = ["Li Xufei",
-        "Zhang Mingyun",
-        "Cao Yangyang",
-        "Chen Yu Wuhan Dev",
-        "Xu Jiang Dev",
-        "Gu Chao",
-        "Sun Wei Wayde",
-        "Wang Tianyi",
-        "Chen Ting",
-        "Li Hongjing"]
     var domElementModel: DomElement?
     
     override func viewDidLoad() {
@@ -52,6 +41,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //MARK: Public Methods
+    @IBAction func onRefreshButtonClicked(sender: AnyObject) {
+        self.refresh()
+    }
+    
     func refresh() {
         counter = 0
         self.addHolderView()
@@ -182,7 +175,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return members.count
+        return memberArr!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -192,17 +185,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
         }
         
-        let member = members[indexPath.row] as? String
+        let member = memberArr![indexPath.row] as? String
         cell?.textLabel?.text = member
+        cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
         
-        if (memberArr!.containsObject(member!)) {
-            cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-            cell?.backgroundColor = UIColor.whiteColor()
-
-        } else {
-            cell?.backgroundColor = Colors.RoyalBlue
-            cell?.accessoryType = UITableViewCellAccessoryType.None
-        }
         return cell!
     }
     
@@ -222,7 +208,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if rurl == SALESFORCE_LOGIN_URL {
             counter++
-            print(counter)
             if counter == 5 {
                 self.setStage(Stage.login)
                 domElementModel?.doLogin()
@@ -271,8 +256,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         let rurl =  webView.request?.URL?.absoluteString
-        print(rurl)
-        print(error?.userInfo)
+        print("didFailLoadWithError: \(rurl)")
     }
     
     //MARK: Segue

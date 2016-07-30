@@ -18,6 +18,7 @@
 		BA9B7B301D352F0C007ACA82 /* TimeCardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B2F1D352F0C007ACA82 /* TimeCardUITests.swift */; };
 		BA9B7B3F1D353157007ACA82 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B7B3E1D353157007ACA82 /* Date.swift */; };
 		BAB682A01D37A996005ED69B /* DomElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6829F1D37A996005ED69B /* DomElement.swift */; };
+		BAC3A1A31D4C6095005F3BF6 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3A1A21D4C6095005F3BF6 /* InfoViewController.swift */; };
 		BAEFC1F71D431942000A3AED /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1F61D431942000A3AED /* AccountViewController.swift */; };
 		BAEFC20E1D436194000A3AED /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1FA1D436194000A3AED /* LTCharacterDiffResult.swift */; };
 		BAEFC20F1D436194000A3AED /* LTCharacterLimbo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFC1FB1D436194000A3AED /* LTCharacterLimbo.swift */; };
@@ -79,6 +80,7 @@
 		BA9B7B311D352F0D007ACA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA9B7B3E1D353157007ACA82 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BAB6829F1D37A996005ED69B /* DomElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomElement.swift; sourceTree = "<group>"; };
+		BAC3A1A21D4C6095005F3BF6 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		BAEFC1F61D431942000A3AED /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		BAEFC1FA1D436194000A3AED /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterDiffResult.swift; sourceTree = "<group>"; };
 		BAEFC1FB1D436194000A3AED /* LTCharacterLimbo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterLimbo.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				BA9B7B0F1D352F0C007ACA82 /* AppDelegate.swift */,
 				BA9B7B111D352F0C007ACA82 /* ViewController.swift */,
 				BAEFC1F61D431942000A3AED /* AccountViewController.swift */,
+				BAC3A1A21D4C6095005F3BF6 /* InfoViewController.swift */,
 				BA9B7B131D352F0C007ACA82 /* Main.storyboard */,
 				BA9B7B161D352F0C007ACA82 /* Assets.xcassets */,
 				BA9B7B181D352F0C007ACA82 /* LaunchScreen.storyboard */,
@@ -417,6 +420,7 @@
 				BA9B7B101D352F0C007ACA82 /* AppDelegate.swift in Sources */,
 				BAEFC2101D436194000A3AED /* LTEasing.swift in Sources */,
 				BAEFC2271D4375F7000A3AED /* ArcLayer.swift in Sources */,
+				BAC3A1A31D4C6095005F3BF6 /* InfoViewController.swift in Sources */,
 				BAEFC2141D436194000A3AED /* LTMorphingLabel+Burn.swift in Sources */,
 				BAEFC2281D4375F7000A3AED /* HolderView.swift in Sources */,
 				BAEFC2131D436194000A3AED /* LTMorphingLabel+Anvil.swift in Sources */,
