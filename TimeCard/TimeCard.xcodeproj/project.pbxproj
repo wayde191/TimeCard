@@ -144,6 +144,7 @@
 		BA9B7B031D352F0C007ACA82 = {
 			isa = PBXGroup;
 			children = (
+				BAC3A1A41D4C675E005F3BF6 /* Logo */,
 				BA9B7B0E1D352F0C007ACA82 /* TimeCard */,
 				BA9B7B231D352F0C007ACA82 /* TimeCardTests */,
 				BA9B7B2E1D352F0C007ACA82 /* TimeCardUITests */,
@@ -215,6 +216,13 @@
 				BAB6829F1D37A996005ED69B /* DomElement.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		BAC3A1A41D4C675E005F3BF6 /* Logo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logo;
 			sourceTree = "<group>";
 		};
 		BAEFC1F81D436194000A3AED /* LTMorphingLabel */ = {
