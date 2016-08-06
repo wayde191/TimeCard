@@ -103,6 +103,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     private func showResult() {
         memberArr = self.domElementModel?.getAllInfo((self.domElementModel?.timecardHTML)! as String)
+        print(memberArr)
         self.tableview.reloadData()
     }
     
@@ -206,8 +207,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: UIWebView Delegate
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool{
-        let rurl =  request.URL?.absoluteString
-        print("shouldStartLoadWithRequest: \(rurl)")
+//        let rurl =  request.URL?.absoluteString
+//        print("shouldStartLoadWithRequest: \(rurl)")
         return true
     }
     

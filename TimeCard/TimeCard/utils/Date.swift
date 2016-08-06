@@ -86,7 +86,7 @@ extension NSDate {
     
     class func getLastMondayStr() -> String {
         let formatter  = NSDateFormatter()
-        formatter.dateFormat = "yyyy-M-dd"
+        formatter.dateFormat = "yyyy-M-d"
         let today = NSDate.get(.Previous, "Monday", considerToday:  true)
         return formatter.stringFromDate(today)
     }
