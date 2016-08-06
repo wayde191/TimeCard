@@ -58,30 +58,32 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkRequiredFields() -> Bool {
-        var isValidate = true
         
-        if ((usernameTF.text?.isEmpty) == true) {
-            isValidate = false
+        guard ((usernameTF.text?.isEmpty) != true) else {
             usernameTF.becomeFirstResponder()
             self.showAlertMessage("UserName is required.")
-            
-        } else if ((secretTF.text?.isEmpty) == true) {
-            isValidate = false
-            secretTF.becomeFirstResponder()
-            self.showAlertMessage("Secret key is required.")
-            
-        } else if ((projectNameTF.text?.isEmpty) == true) {
-            isValidate = false
-            projectNameTF.becomeFirstResponder()
-            self.showAlertMessage("Project name is required.")
-            
-        } else if ((projectOwnerTF.text?.isEmpty) == true) {
-            isValidate = false
-            projectOwnerTF.becomeFirstResponder()
-            self.showAlertMessage("Project owner name is required.")
+            return false
         }
         
-        return isValidate
+        guard ((secretTF.text?.isEmpty) != true) else {
+            secretTF.becomeFirstResponder()
+            self.showAlertMessage("Secret key is required.")
+            return false
+        }
+        
+        guard ((projectNameTF.text?.isEmpty) != true) else {
+            projectNameTF.becomeFirstResponder()
+            self.showAlertMessage("Project name is required.")
+            return false
+        }
+        
+        guard ((projectOwnerTF.text?.isEmpty) != true) else {
+            projectOwnerTF.becomeFirstResponder()
+            self.showAlertMessage("Project owner name is required.")
+            return false
+        }
+        
+        return true
     }
     
     func gobackToHomeVC() {
