@@ -18,15 +18,15 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var secretTF: UITextField!
     @IBOutlet weak var usernameTF: UITextField!
     
-    @IBAction func onCancelButtonClicked(sender: AnyObject) {
+    @IBAction func onCancelButtonClicked(_ sender: AnyObject) {
         self.gobackToHomeVC()
     }
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBAction func onSaveButtonClicked(sender: AnyObject) {
+    @IBAction func onSaveButtonClicked(_ sender: AnyObject) {
         if self.checkRequiredFields() {
             self.updateUserDefault()
-            self.dismissViewControllerAnimated(true) { () -> Void in
+            self.dismiss(animated: true) { () -> Void in
                 self.homeVC?.refresh()
             }
         }
@@ -37,24 +37,24 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
         self.syncUserDefault()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.scrollView.contentSize = CGSize.init(width: self.scrollView.contentSize.width, height: 800)
     }
     
     func syncUserDefault() {
-        usernameTF.text = NSUserDefaults.standardUserDefaults().objectForKey(USERNAME_UD_KEY) as! String?
-        secretTF.text = NSUserDefaults.standardUserDefaults().objectForKey(SECRET_UD_KEY) as! String?
-        projectNameTF.text = NSUserDefaults.standardUserDefaults().objectForKey(PROJECT_NAME_UD_KEY) as! String?
-        projectOwnerTF.text = NSUserDefaults.standardUserDefaults().objectForKey(PROJECT_ONAME_UD_KEY) as! String?
+        usernameTF.text = UserDefaults.standard.object(forKey: USERNAME_UD_KEY) as! String?
+        secretTF.text = UserDefaults.standard.object(forKey: SECRET_UD_KEY) as! String?
+        projectNameTF.text = UserDefaults.standard.object(forKey: PROJECT_NAME_UD_KEY) as! String?
+        projectOwnerTF.text = UserDefaults.standard.object(forKey: PROJECT_ONAME_UD_KEY) as! String?
     }
     
     func updateUserDefault() {
-        NSUserDefaults.standardUserDefaults().setObject(usernameTF.text, forKey: USERNAME_UD_KEY)
-        NSUserDefaults.standardUserDefaults().setObject(secretTF.text, forKey: SECRET_UD_KEY)
-        NSUserDefaults.standardUserDefaults().setObject(projectNameTF.text, forKey: PROJECT_NAME_UD_KEY)
-        NSUserDefaults.standardUserDefaults().setObject(projectOwnerTF.text, forKey: PROJECT_ONAME_UD_KEY)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.set(usernameTF.text, forKey: USERNAME_UD_KEY)
+        UserDefaults.standard.set(secretTF.text, forKey: SECRET_UD_KEY)
+        UserDefaults.standard.set(projectNameTF.text, forKey: PROJECT_NAME_UD_KEY)
+        UserDefaults.standard.set(projectOwnerTF.text, forKey: PROJECT_ONAME_UD_KEY)
+        UserDefaults.standard.synchronize()
     }
     
     func checkRequiredFields() -> Bool {
@@ -85,15 +85,15 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func gobackToHomeVC() {
-        self.dismissViewControllerAnimated(true) { () -> Void in
+        self.dismiss(animated: true) { () -> Void in
             
         }
     }
     
-    func showAlertMessage(message: String) {
-        let alert = UIAlertController.init(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        self.presentViewController(alert, animated: true) { () -> Void in
-            self.performSelector(NSSelectorFromString("gobackToHomeVC"), withObject: nil, afterDelay: 1.3)
+    func showAlertMessage(_ message: String) {
+        let alert = UIAlertController.init(title: nil, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        self.present(alert, animated: true) { () -> Void in
+            self.perform(NSSelectorFromString("gobackToHomeVC"), with: nil, afterDelay: 1.3)
         }
     }
 }

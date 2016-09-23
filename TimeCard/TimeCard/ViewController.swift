@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var pagecontrolView: UIPageControl!
     @IBOutlet weak var dateLabel: UILabel!
     
-    var holderView = HolderView(frame: CGRectZero)
+    var holderView = HolderView(frame: CGRect.zero)
     
     var counter = 0
     var oneAppCounter = 0
@@ -32,11 +32,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         textLabel.delegate = self
         self.domElementModel = DomElement.init(name: "SalesForce", webview: self.webview)
-        self.dateLabel.text = "Start Date: " + NSDate.getLastMondayStr()
+        self.dateLabel.text = "Start Date: " + Date.getLastMondayStr()
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isRunning == false {
             isRunning = true
@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //MARK: Public Methods
-    @IBAction func onRefreshButtonClicked(sender: AnyObject) {
+    @IBAction func onRefreshButtonClicked(_ sender: AnyObject) {
         self.refresh()
     }
     
@@ -58,11 +58,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.addHolderView()
         self.setStage(Stage.ready)
         self.domElementModel?.updateUserInfo()
-        webview.loadRequest(NSURLRequest(URL: NSURL(string: SALESFORCE_LOGIN_URL)!))
+        webview.loadRequest(URLRequest(url: URL(string: SALESFORCE_LOGIN_URL)!))
     }
     
     func gotoAccountViewController() {
-        self.performSegueWithIdentifier("AccountViewControllerIdentifier", sender: self)
+        self.performSegue(withIdentifier: "AccountViewControllerIdentifier", sender: self)
     }
     
     func analyzeDone() {
@@ -73,11 +73,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         holderView.removeFromSuperview()
         self.showResult()
         
-        tabviewContainer.transform = CGAffineTransformScale(tabviewContainer.transform, 0.25, 0.25)
-        UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: UIViewAnimationOptions.CurveEaseInOut,
+        tabviewContainer.transform = tabviewContainer.transform.scaledBy(x: 0.25, y: 0.25)
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: UIViewAnimationOptions(),
             animations: ({
-                self.view.bringSubviewToFront(self.tabviewContainer)
-                self.tabviewContainer.transform = CGAffineTransformScale(self.tabviewContainer.transform, 4.0, 4.0)
+                self.view.bringSubview(toFront: self.tabviewContainer)
+                self.tabviewContainer.transform = self.tabviewContainer.transform.scaledBy(x: 4.0, y: 4.0)
             }), completion: { finished in
                 print("Done")
         })
@@ -85,37 +85,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: Private Methods
     
-    private func checkAccountInfo() -> Bool {
+    fileprivate func checkAccountInfo() -> Bool {
         var result = true
         
-        if STANDER_USER_DEFAULT.objectForKey(USERNAME_UD_KEY) == nil {
+        if STANDER_USER_DEFAULT.object(forKey: USERNAME_UD_KEY) == nil {
             result = false;
-        } else if STANDER_USER_DEFAULT.objectForKey(SECRET_UD_KEY) == nil {
+        } else if STANDER_USER_DEFAULT.object(forKey: SECRET_UD_KEY) == nil {
             result = false;
-        } else if STANDER_USER_DEFAULT.objectForKey(PROJECT_ONAME_UD_KEY) == nil {
+        } else if STANDER_USER_DEFAULT.object(forKey: PROJECT_ONAME_UD_KEY) == nil {
             result = false;
-        } else if STANDER_USER_DEFAULT.objectForKey(PROJECT_NAME_UD_KEY) == nil {
+        } else if STANDER_USER_DEFAULT.object(forKey: PROJECT_NAME_UD_KEY) == nil {
             result = false;
         }
         
         return result
     }
     
-    private func showResult() {
+    fileprivate func showResult() {
         memberArr = self.domElementModel?.getAllInfo((self.domElementModel?.timecardHTML)! as String)
         print(memberArr)
         self.tableview.reloadData()
     }
     
-    private func getSalesforceVerifacationCode() {
-        let alert = UIAlertController.init(title: "Salesforce Verification Code", message: "Please input your verification which Salesforce send to you via email.", preferredStyle: UIAlertControllerStyle.Alert)
+    fileprivate func getSalesforceVerifacationCode() {
+        let alert = UIAlertController.init(title: "Salesforce Verification Code", message: "Please input your verification which Salesforce send to you via email.", preferredStyle: UIAlertControllerStyle.alert)
         
-        alert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+        alert.addTextField { (textField) -> Void in
             textField.textColor = Colors.TCBlue
             textField.placeholder = "Please input your code"
         }
         
-        alert.addAction(UIAlertAction.init(title: "Sure", style: UIAlertActionStyle.Destructive,
+        alert.addAction(UIAlertAction.init(title: "Sure", style: UIAlertActionStyle.destructive,
             handler: { (alertAction) -> Void in
                 let code = alert.textFields?.first?.text
                 if ((code?.isEmpty) == true) {
@@ -125,7 +125,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
         }))
 
-        self.presentViewController(alert, animated: true) { () -> Void in
+        self.present(alert, animated: true) { () -> Void in
             
         }
     }
@@ -144,32 +144,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //MARK: Animation
-    func setStage(stage: String) {
+    func setStage(_ stage: String) {
         self.textLabel.text = stage
         switch stage {
         case Stage.ready:
             holderView.addOval()
-            holderView.ovalLayer.fillColor = Colors.LightSkyBlue.CGColor
+            holderView.ovalLayer.fillColor = Colors.LightSkyBlue.cgColor
             break
         case Stage.login:
             pagecontrolView.currentPage = 1
-            holderView.ovalLayer.fillColor = Colors.SkyBlue.CGColor
+            holderView.ovalLayer.fillColor = Colors.SkyBlue.cgColor
             break
         case Stage.search:
             pagecontrolView.currentPage = 2
-            holderView.ovalLayer.fillColor = Colors.DeepSkyBlue.CGColor
+            holderView.ovalLayer.fillColor = Colors.DeepSkyBlue.cgColor
             break
         case Stage.project:
             pagecontrolView.currentPage = 3
-            holderView.ovalLayer.fillColor = Colors.DodgerBlue.CGColor
+            holderView.ovalLayer.fillColor = Colors.DodgerBlue.cgColor
             break
         case Stage.timecard:
             pagecontrolView.currentPage = 4
-            holderView.ovalLayer.fillColor = Colors.RoyalBlue.CGColor
+            holderView.ovalLayer.fillColor = Colors.RoyalBlue.cgColor
             break
         case Stage.done:
             pagecontrolView.currentPage = 5
-            holderView.ovalLayer.fillColor = Colors.TCBlue.CGColor
+            holderView.ovalLayer.fillColor = Colors.TCBlue.cgColor
             holderView.stopOval()
             holderView.drawBlueAnimatedRectangle()
             break
@@ -179,52 +179,52 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //MARK: UITableView DataSource and Delegate
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memberArr!.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "identtifier"
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if(cell == nil){
-            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: identifier)
         }
         
-        let member = memberArr![indexPath.row] as? String
+        let member = memberArr![(indexPath as NSIndexPath).row] as? String
         cell?.textLabel?.text = member
-        cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+        cell?.accessoryType = UITableViewCellAccessoryType.checkmark
         
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //MARK: UIWebView Delegate
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool{
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool{
 //        let rurl =  request.URL?.absoluteString
 //        print("shouldStartLoadWithRequest: \(rurl)")
         return true
     }
     
-    func webViewDidFinishLoad(webView: UIWebView){
-        let rurl =  webView.request?.URL?.absoluteString
+    func webViewDidFinishLoad(_ webView: UIWebView){
+        let rurl =  webView.request?.url?.absoluteString
         
         if rurl == SALESFORCE_LOGIN_URL {
-            counter++
+            counter += 1
             if counter == 5 {
                 self.setStage(Stage.login)
                 domElementModel?.doLogin()
             }
-        } else if ((rurl?.containsString(SALESFORCE_VER_URL)) == true) {
+        } else if ((rurl?.contains(SALESFORCE_VER_URL)) == true) {
             self.getSalesforceVerifacationCode()
         } else if rurl == SALESFORCE_ONE_APP_URL {
-            oneAppCounter++
+            oneAppCounter += 1
             if 1 == oneAppCounter
             {
                 self.setStage(Stage.search)
@@ -249,7 +249,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                                                 self.domElementModel?.triggerEvent("clickRelatedTimeCard", afterDelay: 1)
                                                                 self.domElementModel?.triggerEvent("getListHtml", afterDelay: 3)
                                                                 
-                                                                self.performSelector(NSSelectorFromString("analyzeDone"), withObject: nil, afterDelay: 4.0)
+                                                                self.perform(NSSelectorFromString("analyzeDone"), with: nil, afterDelay: 4.0)
 
                                                             }
                                                     })
@@ -263,19 +263,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        let rurl =  webView.request?.URL?.absoluteString
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        let rurl =  webView.request?.url?.absoluteString
         print("didFailLoadWithError: \(rurl)")
     }
     
     //MARK: Segue
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return true
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.destinationViewController.isKindOfClass(AccountViewController) {
-            let accountVC = segue.destinationViewController as! AccountViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination.isKind(of: AccountViewController.self) {
+            let accountVC = segue.destination as! AccountViewController
             accountVC.homeVC = self
         }
     }

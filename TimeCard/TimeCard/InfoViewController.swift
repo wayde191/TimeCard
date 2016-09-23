@@ -12,12 +12,12 @@ import UIKit
 
 class InfoViewController: UIViewController, UITextFieldDelegate {
     
-    @IBAction func onCancelButtonClicked(sender: AnyObject) {
+    @IBAction func onCancelButtonClicked(_ sender: AnyObject) {
         self.gobackToHomeVC()
     }
     
     func gobackToHomeVC() {
-        self.dismissViewControllerAnimated(true) { () -> Void in
+        self.dismiss(animated: true) { () -> Void in
             
         }
     }

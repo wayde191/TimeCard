@@ -8,7 +8,7 @@
 
 import Foundation
 
-func getDayOfWeekString(weekDay:Int) -> String {
+func getDayOfWeekString(_ weekDay:Int) -> String {
     switch weekDay {
     case 1:
         return "Sun"
@@ -31,82 +31,82 @@ func getDayOfWeekString(weekDay:Int) -> String {
 }
 
 func getWeekDaysInEnglish() -> [String] {
-    let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    calendar.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+    calendar.locale = Locale(identifier: "en_US_POSIX")
     return calendar.weekdaySymbols
 }
 
 enum SearchDirection {
-    case Next
-    case Previous
+    case next
+    case previous
     
-    var calendarOptions: NSCalendarOptions {
+    var calendarOptions: NSCalendar.Options {
         switch self {
-        case .Next:
-            return .MatchNextTime
-        case .Previous:
-            return [.SearchBackwards, .MatchNextTime]
+        case .next:
+            return .matchNextTime
+        case .previous:
+            return [.searchBackwards, .matchNextTime]
         }
     }
 }
 
 
-extension NSDate {
-    class func get(direction: SearchDirection, _ dayName: String, considerToday consider: Bool = false) -> NSDate {
+extension Date {
+    static func get(_ direction: SearchDirection, _ dayName: String, considerToday consider: Bool = false) -> Date {
         let weekdaysName = getWeekDaysInEnglish()
         
         assert(weekdaysName.contains(dayName), "weekday symbol should be in form \(weekdaysName)")
         
-        let nextWeekDayIndex = weekdaysName.indexOf(dayName)! + 1 // weekday is in form 1 ... 7 where as index is 0 ... 6
+        let nextWeekDayIndex = weekdaysName.index(of: dayName)! + 1 // weekday is in form 1 ... 7 where as index is 0 ... 6
         
-        let today = NSDate()
+        let today = Date()
         
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierChinese)!
-        calendar.timeZone = NSTimeZone(abbreviation: "CST")!
+        var calendar = Calendar(identifier: Calendar.Identifier.chinese)
+        calendar.timeZone = TimeZone(abbreviation: "CST")!
         
-        if consider && calendar.component(.Weekday, fromDate: today) == nextWeekDayIndex {
+        if consider && (calendar as NSCalendar).component(.weekday, from: today) == nextWeekDayIndex {
             return today
         }
         
-        let nextDateComponent = NSDateComponents()
-        nextDateComponent.timeZone = NSTimeZone(abbreviation: "CST")
+        var nextDateComponent = DateComponents()
+        (nextDateComponent as NSDateComponents).timeZone = TimeZone(abbreviation: "CST")
         nextDateComponent.weekday = nextWeekDayIndex
         
         
-        let date = calendar.nextDateAfterDate(today, matchingComponents: nextDateComponent, options: direction.calendarOptions)
+        let date = (calendar as NSCalendar).nextDate(after: today, matching: nextDateComponent, options: direction.calendarOptions)
         return date!
     }
     
-    class func getLastFridayStr() -> String {
-        let formatter  = NSDateFormatter()
+    static func getLastFridayStr() -> String {
+        let formatter  = DateFormatter()
         formatter.dateFormat = "yyyy-M-dd"
-        let today = NSDate.get(.Previous, "Friday", considerToday:  true)
-        return self.getDayOfWeek(formatter.stringFromDate(today))
+        let today = Date.get(.previous, "Friday", considerToday:  true)
+        return self.getDayOfWeek(formatter.string(from: today))
     }
     
-    class func getLastMondayStr() -> String {
-        let formatter  = NSDateFormatter()
+    static func getLastMondayStr() -> String {
+        let formatter  = DateFormatter()
         formatter.dateFormat = "yyyy-M-d"
-        let today = NSDate.get(.Previous, "Monday", considerToday:  true)
-        return formatter.stringFromDate(today)
+        let today = Date.get(.previous, "Monday", considerToday:  true)
+        return formatter.string(from: today)
     }
     
-    class func getDayOfWeek(today:String) -> String {
-        let formatter  = NSDateFormatter()
+    static func getDayOfWeek(_ today:String) -> String {
+        let formatter  = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        let todayDate = formatter.dateFromString(today)!
-        let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let myComponents = myCalendar.components(.Weekday, fromDate: todayDate)
+        let todayDate = formatter.date(from: today)!
+        let myCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        let myComponents = (myCalendar as NSCalendar).components(.weekday, from: todayDate)
         let weekDay = myComponents.weekday
-        let dayStr = getDayOfWeekString(weekDay)
+        let dayStr = getDayOfWeekString(weekDay!)
         
         return dayStr
     }
     
-    class func getTodayWeekStr() -> String {
-        let formatter  = NSDateFormatter()
+    static func getTodayWeekStr() -> String {
+        let formatter  = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        let today = NSDate()
-        return self.getDayOfWeek(formatter.stringFromDate(today))
+        let today = Date()
+        return self.getDayOfWeek(formatter.string(from: today))
     }
 }
