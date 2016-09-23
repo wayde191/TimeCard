@@ -19,7 +19,7 @@ let PROJECT_NAME_UD_KEY     = "ProjectNameUserDefaultKey"
 let PROJECT_ONAME_UD_KEY    = "ProjectOwnerNameUserDefaultKey"
 
 
-let STANDER_USER_DEFAULT    = NSUserDefaults.standardUserDefaults()
+let STANDER_USER_DEFAULT    = UserDefaults.standard
 
 struct Stage {
     static let ready = "Ready, Go!"

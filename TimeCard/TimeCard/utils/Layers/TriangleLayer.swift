@@ -14,12 +14,12 @@ class TriangleLayer: CAShapeLayer {
   
   override init() {
     super.init()
-    fillColor = Colors.red.CGColor
-    strokeColor = Colors.red.CGColor
+    fillColor = Colors.red.cgColor
+    strokeColor = Colors.red.cgColor
     lineWidth = 7.0
     lineCap = kCALineCapRound
     lineJoin = kCALineJoinRound
-    path = trianglePathSmall.CGPath
+    path = trianglePathSmall.cgPath
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -28,56 +28,56 @@ class TriangleLayer: CAShapeLayer {
   
   var trianglePathSmall: UIBezierPath {
     let trianglePath = UIBezierPath()
-    trianglePath.moveToPoint(CGPoint(x: 5.0 + innerPadding, y: 95.0))
-    trianglePath.addLineToPoint(CGPoint(x: 50.0, y: 12.5 + innerPadding))
-    trianglePath.addLineToPoint(CGPoint(x: 95.0 - innerPadding, y: 95.0))
-    trianglePath.closePath()
+    trianglePath.move(to: CGPoint(x: 5.0 + innerPadding, y: 95.0))
+    trianglePath.addLine(to: CGPoint(x: 50.0, y: 12.5 + innerPadding))
+    trianglePath.addLine(to: CGPoint(x: 95.0 - innerPadding, y: 95.0))
+    trianglePath.close()
     return trianglePath
   }
   
   var trianglePathLeftExtension: UIBezierPath {
     let trianglePath = UIBezierPath()
-    trianglePath.moveToPoint(CGPoint(x: 5.0, y: 95.0))
-    trianglePath.addLineToPoint(CGPoint(x: 50.0, y: 12.5 + innerPadding))
-    trianglePath.addLineToPoint(CGPoint(x: 95.0 - innerPadding, y: 95.0))
-    trianglePath.closePath()
+    trianglePath.move(to: CGPoint(x: 5.0, y: 95.0))
+    trianglePath.addLine(to: CGPoint(x: 50.0, y: 12.5 + innerPadding))
+    trianglePath.addLine(to: CGPoint(x: 95.0 - innerPadding, y: 95.0))
+    trianglePath.close()
     return trianglePath
   }
   
   var trianglePathRightExtension: UIBezierPath {
     let trianglePath = UIBezierPath()
-    trianglePath.moveToPoint(CGPoint(x: 5.0, y: 95.0))
-    trianglePath.addLineToPoint(CGPoint(x: 50.0, y: 12.5 + innerPadding))
-    trianglePath.addLineToPoint(CGPoint(x: 95.0, y: 95.0))
-    trianglePath.closePath()
+    trianglePath.move(to: CGPoint(x: 5.0, y: 95.0))
+    trianglePath.addLine(to: CGPoint(x: 50.0, y: 12.5 + innerPadding))
+    trianglePath.addLine(to: CGPoint(x: 95.0, y: 95.0))
+    trianglePath.close()
     return trianglePath
   }
   
   var trianglePathTopExtension: UIBezierPath {
     let trianglePath = UIBezierPath()
-    trianglePath.moveToPoint(CGPoint(x: 5.0, y: 95.0))
-    trianglePath.addLineToPoint(CGPoint(x: 50.0, y: 12.5))
-    trianglePath.addLineToPoint(CGPoint(x: 95.0, y: 95.0))
-    trianglePath.closePath()
+    trianglePath.move(to: CGPoint(x: 5.0, y: 95.0))
+    trianglePath.addLine(to: CGPoint(x: 50.0, y: 12.5))
+    trianglePath.addLine(to: CGPoint(x: 95.0, y: 95.0))
+    trianglePath.close()
     return trianglePath
   }
   
   func animate() {
     let triangleAnimationLeft: CABasicAnimation = CABasicAnimation(keyPath: "path")
-    triangleAnimationLeft.fromValue = trianglePathSmall.CGPath
-    triangleAnimationLeft.toValue = trianglePathLeftExtension.CGPath
+    triangleAnimationLeft.fromValue = trianglePathSmall.cgPath
+    triangleAnimationLeft.toValue = trianglePathLeftExtension.cgPath
     triangleAnimationLeft.beginTime = 0.0
     triangleAnimationLeft.duration = 0.3
 
     let triangleAnimationRight: CABasicAnimation = CABasicAnimation(keyPath: "path")
-    triangleAnimationRight.fromValue = trianglePathLeftExtension.CGPath
-    triangleAnimationRight.toValue = trianglePathRightExtension.CGPath
+    triangleAnimationRight.fromValue = trianglePathLeftExtension.cgPath
+    triangleAnimationRight.toValue = trianglePathRightExtension.cgPath
     triangleAnimationRight.beginTime = triangleAnimationLeft.beginTime + triangleAnimationLeft.duration
     triangleAnimationRight.duration = 0.25
 
     let triangleAnimationTop: CABasicAnimation = CABasicAnimation(keyPath: "path")
-    triangleAnimationTop.fromValue = trianglePathRightExtension.CGPath
-    triangleAnimationTop.toValue = trianglePathTopExtension.CGPath
+    triangleAnimationTop.fromValue = trianglePathRightExtension.cgPath
+    triangleAnimationTop.toValue = trianglePathTopExtension.cgPath
     triangleAnimationTop.beginTime = triangleAnimationRight.beginTime + triangleAnimationRight.duration
     triangleAnimationTop.duration = 0.20
 
@@ -86,8 +86,8 @@ class TriangleLayer: CAShapeLayer {
       triangleAnimationTop]
     triangleAnimationGroup.duration = triangleAnimationTop.beginTime + triangleAnimationTop.duration
     triangleAnimationGroup.fillMode = kCAFillModeForwards
-    triangleAnimationGroup.removedOnCompletion = false
-    addAnimation(triangleAnimationGroup, forKey: nil)
+    triangleAnimationGroup.isRemovedOnCompletion = false
+    add(triangleAnimationGroup, forKey: nil)
   }
   
 }

@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 extension NSRange {
-    func rangeForString(str: String) -> Range<String.Index>? {
+    func rangeForString(_ str: String) -> Range<String.Index>? {
         guard location != NSNotFound else { return nil }
-        return str.startIndex.advancedBy(location) ..< str.startIndex.advancedBy(location + length)
+        return str.characters.index(str.startIndex, offsetBy: location) ..< str.characters.index(str.startIndex, offsetBy: location + length)
     }
 }
 
@@ -32,37 +32,37 @@ class DomElement: NSObject {
     }
     
     func updateUserInfo() {
-        ud_username = STANDER_USER_DEFAULT.objectForKey(USERNAME_UD_KEY) as? String
-        ud_password = STANDER_USER_DEFAULT.objectForKey(SECRET_UD_KEY) as? String
-        ud_pname = STANDER_USER_DEFAULT.objectForKey(PROJECT_NAME_UD_KEY) as? String
-        ud_poname = STANDER_USER_DEFAULT.objectForKey(PROJECT_ONAME_UD_KEY) as? String
+        ud_username = STANDER_USER_DEFAULT.object(forKey: USERNAME_UD_KEY) as? String
+        ud_password = STANDER_USER_DEFAULT.object(forKey: SECRET_UD_KEY) as? String
+        ud_pname = STANDER_USER_DEFAULT.object(forKey: PROJECT_NAME_UD_KEY) as? String
+        ud_poname = STANDER_USER_DEFAULT.object(forKey: PROJECT_ONAME_UD_KEY) as? String
     }
     
-    func getAllInfo(text: String) -> NSArray {
+    func getAllInfo(_ text: String) -> NSArray {
         let members = NSMutableArray()
-        let lastMon = NSDate.getLastMondayStr()
+        let lastMon = Date.getLastMondayStr()
         
-        let arr = text.componentsSeparatedByString("dark actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
+        let arr = text.components(separatedBy: "dark actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
         for record in arr {
-            if record.containsString(lastMon) {
+            if record.contains(lastMon) {
                 do {
-                    let rows = record.componentsSeparatedByString("tableRowGroup")
+                    let rows = record.components(separatedBy: "tableRowGroup")
                     var contextStr = ""
                     for context in rows {
-                        if context.containsString("Resource:") {
+                        if context.contains("Resource:") {
                             contextStr = context
                             break
                         }
                     }
                     
-                    let input:String = contextStr.stringByReplacingOccurrencesOfString("\\\"", withString: "")
-                    let regex = try NSRegularExpression(pattern: "forceOutputLookup\">(.*)</span>", options: NSRegularExpressionOptions.CaseInsensitive)
-                    let matches = regex.matchesInString(input, options: [], range: NSRange(location: 0, length: input.utf16.count))
+                    let input:String = contextStr.replacingOccurrences(of: "\\\"", with: "")
+                    let regex = try NSRegularExpression(pattern: "forceOutputLookup\">(.*)</span>", options: NSRegularExpression.Options.caseInsensitive)
+                    let matches = regex.matches(in: input, options: [], range: NSRange(location: 0, length: input.utf16.count))
                     if let match = matches.first {
-                        let range = match.rangeAtIndex(1)
+                        let range = match.rangeAt(1)
                         if let swiftRange = range.rangeForString(input) {
-                            let name = input.substringWithRange(swiftRange)
-                            members.addObject(name)
+                            let name = input.substring(with: swiftRange)
+                            members.add(name)
                         }
                     }
                 } catch {
@@ -73,49 +73,49 @@ class DomElement: NSObject {
         return members
     }
     
-    func doVerificate(code: String) {
+    func doVerificate(_ code: String) {
         let fillCode = "document.getElementById('emc').value='" + code + "';"
         let clickVerify = "document.getElementById('save').click();"
-        self.webview.stringByEvaluatingJavaScriptFromString(fillCode + clickVerify)
+        self.webview.stringByEvaluatingJavaScript(from: fillCode + clickVerify)
     }
     
     func doLogin() {
         let fillPasswordScript = "document.getElementById('password').value='" + ud_password! + "';"
         let fillUsernameScript = "document.getElementById('username').value='" + ud_username! + "';"
         let clickLoginScript = "document.getElementById('Login').click();"
-        self.webview.stringByEvaluatingJavaScriptFromString(fillUsernameScript + fillPasswordScript + clickLoginScript)
+        self.webview.stringByEvaluatingJavaScript(from: fillUsernameScript + fillPasswordScript + clickLoginScript)
     }
     
     func searchProject() {
-        self.webview.stringByEvaluatingJavaScriptFromString(
-            "var ele = document.getElementsByClassName('searchInputField')[0];"
+        self.webview.stringByEvaluatingJavaScript(
+            from: "var ele = document.getElementsByClassName('searchInputField')[0];"
                 + "ele.value = '" + ud_pname! + "';"
                 + "ele.focus();var ke3 = document.createEvent('Events');ke3.initEvent('keypress', true, true);ke3.keyCode = ke3.which = 13;        ele.dispatchEvent(ke3);")
     }
     
     func clickRelated() {
-        self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('nav-container')[0].getElementsByTagName('a')[1].click()")
+        self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByClassName('nav-container')[0].getElementsByTagName('a')[1].click()")
     }
     
     func clickRelatedTimeCard() {
-        self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('forceRelatedListCard')[3].click()")
+        self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByClassName('forceRelatedListCard')[3].click()")
     }
     
     func getListHtml() {
-        let html = self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('listContent')[1].getElementsByTagName('ul')[0].innerHTML");
+        let html = self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByClassName('listContent')[1].getElementsByTagName('ul')[0].innerHTML");
         self.timecardHTML = html!
     }
     
     func getProjectIndex() -> Int {
         var index = 0
         
-        let html = self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('listContent')[0].innerHTML");
-        var arr = html!.componentsSeparatedByString("light actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
-        arr.removeAtIndex(0)
+        let html = self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByClassName('listContent')[0].innerHTML");
+        var arr = html!.components(separatedBy: "light actionable uiInfiniteListRow forceActionRow forceListRecord forceRecordLayout")
+        arr.remove(at: 0)
         
         for project in arr {
-            if project.containsString(ud_pname!) && project.containsString(ud_poname!) {
-                index = arr.indexOf(project)!
+            if project.contains(ud_pname!) && project.contains(ud_poname!) {
+                index = arr.index(of: project)!
             }
         }
         
@@ -125,43 +125,44 @@ class DomElement: NSObject {
     func clickProjectFound() {
         let projectIndex = getProjectIndex()
         
-        self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('listContent')[0].getElementsByClassName('light')[\(projectIndex)].getElementsByClassName('body')[0].getElementsByTagName('a')[0].click()")
+        self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByClassName('listContent')[0].getElementsByClassName('light')[\(projectIndex)].getElementsByClassName('body')[0].getElementsByTagName('a')[0].click()")
     }
     
     func clickProjectItem() {
-        self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('selectorItem')[1].getElementsByTagName('a')[0].click()")
+        self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByClassName('selectorItem')[1].getElementsByTagName('a')[0].click()")
     }
     
     func clickToggleNavButton() {
-        self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByClassName('toggleNav')[0].click();")
+        self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByClassName('toggleNav')[0].click();")
     }
     
     func clickProject() {
-        self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByTagName('ul')[2].getElementsByTagName('li')[0].getElementsByTagName('a')[0].click();")
+        self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByTagName('ul')[2].getElementsByTagName('li')[0].getElementsByTagName('a')[0].click();")
     }
     
-    func triggerEvent(selectorName: String, afterDelay: Double) {
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(afterDelay * Double(NSEC_PER_SEC)))
+    func triggerEvent(_ selectorName: String, afterDelay: Double) {
+        let delayTime = DispatchTime.now() + Double(Int64(afterDelay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
-            self.performSelector(NSSelectorFromString(selectorName))
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            self.perform(NSSelectorFromString(selectorName))
         }
     }
     
-    func findElementByClassNameUntil(className: String, var timesLeft: Int8, callback: (Bool) -> ()){
+    func findElementByClassNameUntil(_ className: String, timesLeft: Int8, callback: @escaping (Bool) -> ()){
+        var timesLeft = timesLeft
         var isFound = false
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             
-            let htmlStr = self.webview.stringByEvaluatingJavaScriptFromString("document.getElementsByTagName('HTML')[0].innerHTML")
+            let htmlStr = self.webview.stringByEvaluatingJavaScript(from: "document.getElementsByTagName('HTML')[0].innerHTML")
             
-            isFound = (htmlStr?.containsString(className))!
+            isFound = (htmlStr?.contains(className))!
             if isFound == true {
                 callback(true)
             } else {
                 if timesLeft > 0 {
-                    timesLeft--
+                    timesLeft -= 1
                     self.findElementByClassNameUntil(className, timesLeft: timesLeft, callback: callback)
                 } else {
                     callback(false)

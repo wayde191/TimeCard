@@ -1,29 +1,32 @@
 import UIKit
 
 
-var x = Int("555")
-if x != nil {
-    print(x!.successor()) // 556
+func stringCharactersCount(s:String) -> Int
+{
+    return s.characters.count
 }
 
-var y = Int("555")
-print(y!.successor()) // 556
+func stringToInt(s:String) -> Int
+{
+    if let x = Int(s)
+    {
+        return x
+    }
+    return 0
+}
 
-//let a = 4
-//if a < 5
-//    print("Something")
-//
-//
-//var str = "Some string"
-//// OR
-//var str2:String
-//str2 = "Other string"
-//
-//str2 = 10
+func executeSuccessor(f:String -> Int, s:String) -> Int
+{
+    return f(s).successor()
+}
+
+let f1 = stringCharactersCount
+let f2 = stringToInt
+
+executeSuccessor(f1, s:"5555")    // 5
+executeSuccessor(f2, s:"5555")    // 5556
 
 
-var t:(String, Int) = ("John", 33)
-print(t.0, t.1)
 
 
 

@@ -20,10 +20,10 @@ class HolderView: UIView {
   let blueRectangleLayer = RectangleLayer()
   let arcLayer = ArcLayer()
 
-  var parentFrame :CGRect = CGRectZero
+  var parentFrame :CGRect = CGRect.zero
   weak var delegate:HolderViewDelegate?
     
-    var ovalTimer: NSTimer?
+    var ovalTimer: Timer?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -37,7 +37,7 @@ class HolderView: UIView {
   func addOval() {
     layer.addSublayer(ovalLayer)
     ovalLayer.expand()
-    NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "wobbleOval",
+    Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(HolderView.wobbleOval),
       userInfo: nil, repeats: false)
   }
     
@@ -46,27 +46,27 @@ class HolderView: UIView {
     }
 
     func wobbleOval() {
-        ovalTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: ovalLayer, selector: "wobble", userInfo: nil, repeats: true)
+        ovalTimer = Timer.scheduledTimer(timeInterval: 1.0, target: ovalLayer, selector: "wobble", userInfo: nil, repeats: true)
     }
     
     func drawBlueAnimatedRectangle() {
         ovalLayer.removeFromSuperlayer()
         layer.addSublayer(blueRectangleLayer)
         blueRectangleLayer.animateStrokeWithColor(Colors.blue)
-        NSTimer.scheduledTimerWithTimeInterval(0.40, target: self, selector: "drawArc",
+        Timer.scheduledTimer(timeInterval: 0.40, target: self, selector: #selector(HolderView.drawArc),
             userInfo: nil, repeats: false)
     }
 
     func drawArc() {
         layer.addSublayer(arcLayer)
         arcLayer.animate()
-        NSTimer.scheduledTimerWithTimeInterval(1.30, target: self, selector: "expandView",
+        Timer.scheduledTimer(timeInterval: 1.30, target: self, selector: #selector(HolderView.expandView),
           userInfo: nil, repeats: false)
     }
 
     func expandView() {
         layer.sublayers = nil
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions(), animations: {
           self.frame = self.parentFrame
           }, completion: { finished in
             self.addLabel()
